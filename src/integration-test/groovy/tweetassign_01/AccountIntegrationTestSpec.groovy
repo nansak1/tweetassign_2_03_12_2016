@@ -14,7 +14,7 @@ class AccountIntegrationTestSpec extends Specification {
 
     }
 
-    def "A4. Saving account with a non-unique email or handle address must fail"() {
+    def "A4: Saving account with a non-unique email or handle address must fail"() {
         setup:
 
         def arr = [
@@ -58,7 +58,7 @@ class AccountIntegrationTestSpec extends Specification {
     }
 
 
-    def "F1. An account may have multiple followers (integration test)"() {
+    def "F1: An account may have multiple followers (integration test)"() {
         setup:
         def arr = [
                 ["accountHandle": 'walterauma', "fullName": 'Walter Auma', "emailAddress": 'walterauma@umn.edu', "accountPassword": "msse2016ASSIGN"],
@@ -99,6 +99,40 @@ class AccountIntegrationTestSpec extends Specification {
 
 
     }
+
+    //F2. Two accounts may follow each other
+    def "F2: Two accounts may follow each other" (){
+
+        setup:
+
+        def userA = new Account("accountHandle": 'walterauma', "fullName": 'Walter Auma', "emailAddress": 'walterauma@umn.edu', "accountPassword": "msse2016ASSIGN")
+        def userB = new Account("accountHandle": 'naynan', "fullName": 'Nayna Nayate', "emailAddress": 'naynan@umn.edu', "accountPassword": "msse2016ASSIGN")
+
+
+        when:
+        //userA follows UserB, userB follows UserA
+        userA.addToFollowing(userB)
+        userA.save(flush:true, failOnError: true)
+        userB.addToFollowing(userA)
+        userA.save(flush:true, failOnError: true)
+
+        then:
+        //shows that User A is following User B
+        userA.id
+        !userA.hasErrors()
+        userA.fullName == 'Walter Auma'
+        //userA.get(userA.id).following.fullName == 'Nayna Nayate' //failing
+        userA.following[0].fullName == 'Nayna Nayate'
+
+
+        //shows that User B is following User A
+        userB.id
+        !userB.hasErrors()
+        userB.fullName == 'Nayna Nayate'
+        userB.following[0].fullName == 'Walter Auma'
+
+    }
+
 
 
     def cleanup() {
