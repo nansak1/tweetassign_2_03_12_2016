@@ -77,7 +77,6 @@ class AccountIntegrationTestSpec extends Specification {
         // Add new account with multiple followers
 
         def newAcc = new Account("accountHandle": 'billgraham', "fullName": 'Bill Graham', "emailAddress": 'bgraham@umn.edu', "accountPassword": "msse2016ASSIGN", "followers": acc01)
-        // newAcc.addToFollowers(acc03)
         newAcc.save(flush: true, failOnError: true)
 
         // Update an account, adding new followers
@@ -125,7 +124,6 @@ class AccountIntegrationTestSpec extends Specification {
         userA.id
         !userA.hasErrors()
         userA.fullName == 'Walter Auma'
-        //userA.get(userA.id).following.fullName == 'Nayna Nayate' //failing
         userA.following.find { it.fullName == 'Nayna Nayate' }
 
         //shows that User B is following User A
