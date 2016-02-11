@@ -14,7 +14,7 @@ class AccountIntegrationTestSpec extends Specification {
 
     }
 
-    def "A4: Saving account with a non-unique email or handle address must fail"() {
+    def "A4. Saving account with a non-unique email or handle address must fail (integration test)"() {
         setup:
 
         def arr = [
@@ -58,7 +58,7 @@ class AccountIntegrationTestSpec extends Specification {
     }
 
 
-    def "F1: An account may have multiple followers (integration test)"() {
+    def "F1. An account may have multiple followers (integration test)"() {
         setup:
         def arr = [
                 ["accountHandle": 'walterauma', "fullName": 'Walter Auma', "emailAddress": 'walterauma@umn.edu', "accountPassword": "msse2016ASSIGN"],
@@ -77,6 +77,8 @@ class AccountIntegrationTestSpec extends Specification {
         // Add new account with multiple followers
 
         def newAcc = new Account("accountHandle": 'billgraham', "fullName": 'Bill Graham', "emailAddress": 'bgraham@umn.edu', "accountPassword": "msse2016ASSIGN", "followers": acc01)
+        newAcc.addToFollowers(acc02)
+        newAcc.addToFollowers(acc04)
         newAcc.save(flush: true, failOnError: true)
 
         // Update an account, adding new followers
@@ -92,6 +94,10 @@ class AccountIntegrationTestSpec extends Specification {
         newAcc.hasErrors() == false
         newAcc.get(newAcc.id).fullName == 'Bill Graham'
 
+        newAcc.get(newAcc.id).followers.find{it.fullName =='Walter Auma'}
+        newAcc.get(newAcc.id).followers.find{it.fullName =='Nayna Nayate'}
+        newAcc.get(newAcc.id).followers.find{it.fullName =='Nayna Natalie'}
+
 
         foundAcc.id
         foundAcc.hasErrors() == false
@@ -104,7 +110,7 @@ class AccountIntegrationTestSpec extends Specification {
     }
 
     //F2. Two accounts may follow each other
-    def "F2: Two accounts may follow each other"() {
+    def "F2. Two accounts may follow each other (integration test)"() {
 
         setup:
 

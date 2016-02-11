@@ -34,7 +34,7 @@ class MessageSpec extends Specification {
 
     //M2. Message text is required to be non-blank and 40 characters or less
 
-    def "M2: Message text is not blank and 40 characters or less"() {
+    def "M2. Message text is required to be non-blank and 40 characters or less (data-driven unit test)"() {
 
         given:
         // new message from myAcc
