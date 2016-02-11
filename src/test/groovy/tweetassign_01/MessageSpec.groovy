@@ -57,8 +57,8 @@ class MessageSpec extends Specification {
 
         descrip                   | someText                                      | msgSaved
         "blank text"              | ''                                            | false
-        "some letters "           | 'ssf'                                         | true    //failing
-        "less than 40 characters" | 'Supercalifragilisticexpialidocious'          | true     //failing
+        "some letters "           | 'ssf'                                         | true
+        "less than 40 characters" | 'Supercalifragilisticexpialidocious'          | true
         "more than 40 characters" | 'the quick brown fox jumps over the lazy dog' | false
         "number"                  | 12345                                         | true
         "null value"              | null                                          | false

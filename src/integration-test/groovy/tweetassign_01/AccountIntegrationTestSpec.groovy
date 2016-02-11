@@ -69,7 +69,7 @@ class AccountIntegrationTestSpec extends Specification {
 
         def acc01 = new Account(arr[0]).save(flush: true, failOnError: true)
         def acc02 = new Account(arr[1]).save(flush: true, failOnError: true)
-        // def acc03 = new Account(arr[2]).save(flush: true, failOnError: true)
+        def acc03 = new Account(arr[2]).save(flush: true, failOnError: true)
         def acc04 = new Account(arr[3]).save(flush: true, failOnError: true)
 
         when:
@@ -84,6 +84,7 @@ class AccountIntegrationTestSpec extends Specification {
 
         def foundAcc = acc02.get(acc02.id)
         foundAcc.addToFollowers(acc04)
+        foundAcc.addToFollowers(acc03)
         foundAcc.save(flush: true, failOnError: true)
 
         then:
@@ -97,6 +98,8 @@ class AccountIntegrationTestSpec extends Specification {
         foundAcc.hasErrors() == false
 
         // acc02.get(acc02.id).followers[0].fullName == 'Nayna Natalie'
+        acc02.get(acc02.id).followers.find { it.fullName == 'Nayna Natalie' }
+        acc02.get(acc02.id).followers.find { it.fullName == 'Janet Akinyi' }
 
 
     }
@@ -123,13 +126,13 @@ class AccountIntegrationTestSpec extends Specification {
         !userA.hasErrors()
         userA.fullName == 'Walter Auma'
         //userA.get(userA.id).following.fullName == 'Nayna Nayate' //failing
-        userA.following[0].fullName == 'Nayna Nayate'
+        userA.following.find { it.fullName == 'Nayna Nayate' }
 
         //shows that User B is following User A
         userB.id
         !userB.hasErrors()
         userB.fullName == 'Nayna Nayate'
-        userB.following[0].fullName == 'Walter Auma'
+        userB.following.find { it.fullName == 'Walter Auma' }
 
     }
 
