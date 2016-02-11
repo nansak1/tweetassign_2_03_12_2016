@@ -16,13 +16,12 @@ class AccountSpec extends Specification {
 
     }
 
-
     //A1: Saving an account with a valid handle, email, password and name will succeed
 
-    def 'A1: Test saving an account when required fields are specified' (){
+    def 'A1: Test saving an account when required fields are specified'() {
 
         given:
-        def aUser = new Account ("fullName": 'Nayna Nayate', "emailAddress": 'nayat002@umn.edu', "accountHandle": 'nayna', "accountPassword": 'S0m3Word')
+        def aUser = new Account("fullName": 'Nayna Nayate', "emailAddress": 'nayat002@umn.edu', "accountHandle": 'nayna', "accountPassword": 'S0m3Word')
 
         when:
         aUser.save()
@@ -33,10 +32,10 @@ class AccountSpec extends Specification {
 
     }
 
-    def 'A2: Does not save an account with missing required values'(){
+    def 'A2: Does not save an account with missing required values'() {
 
         given:
-        def aUser = new Account ("fullName": fullName, "emailAddress": emailAddress, "accountHandle": accountHandle, "accountPassword": accountPassword)
+        def aUser = new Account("fullName": fullName, "emailAddress": emailAddress, "accountHandle": accountHandle, "accountPassword": accountPassword)
 
         when:
         aUser.save()
@@ -47,12 +46,12 @@ class AccountSpec extends Specification {
 
         where:
 
-        decription          | fullName     | emailAddress       | accountHandle |  accountPassword   | saveAcc
-        "email missing"     |'nayna n'     | ''                 | 'b15'         | 'h3Lloworld'       | false
-        "no missing"        |'nayna n'     | 'b15@yahoo.com'    | 'b15'         |  'h3Lloworld'      | true
-        "handle missing"    |'Walt Disney' |'wd@disney.world'   |''             | 'waltd1sNey'       | false
-        "password missing"  |'Walt Disney' |'wd@disney.world'   |'walt'         | ''                 | false
-        "handle missing"    |'Walt Disney' |'wd@disney.world'   |''             | 'waltd1sNey'       | false
+        decription         | fullName      | emailAddress      | accountHandle | accountPassword | saveAcc
+        "email missing"    | 'nayna n'     | ''                | 'b15'         | 'h3Lloworld'    | false
+        "no missing"       | 'nayna n'     | 'b15@yahoo.com'   | 'b15'         | 'h3Lloworld'    | true
+        "handle missing"   | 'Walt Disney' | 'wd@disney.world' | ''            | 'waltd1sNey'    | false
+        "password missing" | 'Walt Disney' | 'wd@disney.world' | 'walt'        | ''              | false
+        "handle missing"   | 'Walt Disney' | 'wd@disney.world' | ''            | 'waltd1sNey'    | false
 
 
     }
@@ -87,7 +86,6 @@ class AccountSpec extends Specification {
         "password word with spaces characters"  | "msse216 Ass 01"    | true
 
     }
-
 
 
     def cleanup() {
