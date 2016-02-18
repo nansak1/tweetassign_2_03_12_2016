@@ -9,14 +9,9 @@ import spock.lang.*
 @Rollback
 class AccountIntegrationTestSpec extends Specification {
 
-
-    def setup() {
-
-    }
-
     def "A4. Saving account with a non-unique email or handle address must fail (integration test)"() {
         setup:
-
+        def accountsBefore = Account.count()
         def arr = [
                 ["accountHandle": 'walterauma', "fullName": 'Walter Auma', "emailAddress": 'walterauma@umn.edu', "accountPassword": "msse2016ASSIGN"],
                 ["accountHandle": 'naynanayate', "fullName": 'Nayna Nayate', "emailAddress": 'walterauma@umn.edu', "accountPassword": "msse2016ASSIGN"],
@@ -55,6 +50,8 @@ class AccountIntegrationTestSpec extends Specification {
         acc04.get(acc04.id).emailAddress == 'natalien@umn.edu'
         acc04.hasErrors() == false
 
+        Account.count() == accountsBefore + 2
+
     }
 
 
@@ -89,7 +86,6 @@ class AccountIntegrationTestSpec extends Specification {
         foundAcc.save(flush: true, failOnError: true)
 
         then:
-
         newAcc.id
         newAcc.hasErrors() == false
         newAcc.get(newAcc.id).fullName == 'Bill Graham'
@@ -101,8 +97,6 @@ class AccountIntegrationTestSpec extends Specification {
 
         foundAcc.id
         foundAcc.hasErrors() == false
-
-        // acc02.get(acc02.id).followers[0].fullName == 'Nayna Natalie'
         acc02.get(acc02.id).followers.find { it.fullName == 'Nayna Natalie' }
         acc02.get(acc02.id).followers.find { it.fullName == 'Janet Akinyi' }
 
@@ -114,8 +108,8 @@ class AccountIntegrationTestSpec extends Specification {
 
         setup:
 
-        def userA = new Account("accountHandle": 'walterauma', "fullName": 'Walter Auma', "emailAddress": 'walterauma@umn.edu', "accountPassword": "msse2016ASSIGN")
-        def userB = new Account("accountHandle": 'naynan', "fullName": 'Nayna Nayate', "emailAddress": 'naynan@umn.edu', "accountPassword": "msse2016ASSIGN")
+        def userA = new Account(accountHandle: 'walterauma', fullName: 'Walter Auma', emailAddress: 'walterauma@umn.edu', accountPassword: "msse2016ASSIGN")
+        def userB = new Account(accountHandle: 'naynan', fullName: 'Nayna Nayate', emailAddress: 'naynan@umn.edu', accountPassword: "msse2016ASSIGN")
 
 
         when:
@@ -139,10 +133,5 @@ class AccountIntegrationTestSpec extends Specification {
         userB.following.find { it.fullName == 'Walter Auma' }
 
     }
-
-
-    def cleanup() {
-    }
-
 
 }
