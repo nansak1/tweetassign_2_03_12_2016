@@ -15,7 +15,7 @@ class AccountSpec extends Specification {
 
         given:
         def accountsBefore = Account.count()
-        def aUser = new Account(fullName: 'Nayna Nayate', emailAddress: 'nayat002@umn.edu', accountHandle: 'nayna', accountPassword: 'S0m3Word')
+        def aUser = new Account("fullName": 'Nayna Nayate', "emailAddress": 'nayat002@umn.edu', "accountHandle": 'nayna', "accountPassword": 'S0m3Word')
 
         when:
         aUser.save()
@@ -23,14 +23,14 @@ class AccountSpec extends Specification {
         then:
         aUser.id
         !aUser.hasErrors();
-        Account.count() == accountsBefore+1
+        Account.count() == accountsBefore + 1
     }
 
     def 'A2. Saving an account missing any of the required values of handle email, password and name will fail (data-driven unit test): #description'() {
 
         given:
         def accountsBefore = Account.count()
-        def aUser = new Account(fullName: fullName, emailAddress: emailAddress, accountHandle: accountHandle, accountPassword: accountPassword)
+        def aUser = new Account("fullName": fullName, "emailAddress": emailAddress, "accountHandle": accountHandle, "accountPassword": accountPassword)
 
         when:
         aUser.save()
@@ -41,7 +41,7 @@ class AccountSpec extends Specification {
         accountsBefore == Account.count()
 
         where:
-        description                | fullName      | emailAddress      | accountHandle | accountPassword
+        description               | fullName      | emailAddress      | accountHandle | accountPassword
         "emailAddress missing"    | 'nayna n'     | ''                | 'b15'         | 'h3Lloworld'
         "accountHandle missing"   | 'Walt Disney' | 'wd@disney.world' | ''            | 'waltd1sNey'
         "accountPassword missing" | 'Walt Disney' | 'wd@disney.world' | 'walt'        | ''
@@ -51,7 +51,7 @@ class AccountSpec extends Specification {
     def "A3. Saving an account with an invalid password will fail. Passwords must be 8-16 characters and have at least 1 number, at least one lower-case letter, at least 1 upper-case letter (data-driven unit test)"() {
         setup:
         def accountsBefore = Account.count()
-        def cuser = [accountHandle: 'walterauma', fullName: 'Walter Auma', emailAddress: 'walterauma@umn.edu', accountPassword: accPass]
+        def cuser = ["accountHandle": 'walterauma', "fullName": 'Walter Auma', "emailAddress": 'walterauma@umn.edu', "accountPassword": accPass]
         def user = new Account(cuser)
 
         when: "When an attempt is made to save user information"
@@ -65,23 +65,23 @@ class AccountSpec extends Specification {
 
         where: "Different typed of passwords"
 
-        descrip                                 | accPass
-        "blank password"                        | ''
-        "null password"                         | null
-        "uppercase password no digits"          | 'MSSEASSIGNMENT'
-        "lowercase password no digits"          | 'msseassignment'
-        "mixed case password no digits"         | 'msseASSIGNMENT'
-        "digits only password"                  | '1234562342342'
-        "digits with only upper case"           | '12345623MSSE'
-        "digits with only lower case"           | '12345623msse'
-        "password with 7 characters"            | 'msSSE12'
-        "password with 17 characters"           | '9msse2016A23dgIGN'
+        descrip                         | accPass
+        "blank password"                | ''
+        "null password"                 | null
+        "uppercase password no digits"  | 'MSSEASSIGNMENT'
+        "lowercase password no digits"  | 'msseassignment'
+        "mixed case password no digits" | 'msseASSIGNMENT'
+        "digits only password"          | '1234562342342'
+        "digits with only upper case"   | '12345623MSSE'
+        "digits with only lower case"   | '12345623msse'
+        "password with 7 characters"    | 'msSSE12'
+        "password with 17 characters"   | '9msse2016A23dgIGN'
     }
 
     def 'account saves with valid password: #descrip'() {
         setup:
         def accountsBefore = Account.count()
-        def cuser = [accountHandle: 'walterauma', fullName: 'Walter Auma', emailAddress: 'walterauma@umn.edu', accountPassword: accPass]
+        def cuser = ["accountHandle": 'walterauma', "fullName": 'Walter Auma', "emailAddress": 'walterauma@umn.edu', "accountPassword": accPass]
         def user = new Account(cuser)
 
         when: "When an attempt is made to save user information"
