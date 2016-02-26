@@ -12,7 +12,7 @@ class MessageSpec extends Specification {
 
         setup:
         def beforeCount = Message.count()
-        def a = ["accountHandle": 'nayna2016', "fullName": 'Nayna Natalie', "emailAddress": 'natalien@umn.edu', "accountPassword": 'msse2016ASSIGN']
+        def a = [accountHandle: 'nayna2016', fullName: 'Nayna Natalie', emailAddress: 'natalien@umn.edu', accountPassword: 'msse2016ASSIGN']
         def myAcc = new Account(a)
         def tweetMsg = new Message(msgText: someText, acc: myAcc)
 
