@@ -5,6 +5,9 @@ package tweetassign_01
 //@Resource(uri='/accounts')
 
 class Account {
+
+    //transient springSecurityService
+
     String accountHandle
     String fullName
     String emailAddress
@@ -17,4 +20,15 @@ class Account {
         accountPassword nullable:false, blank:false, size:8..16,matches:"^.(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*\$"
 
     }
+
+
+  /*  def beforeInsert(){
+        encodePassword()
+    }
+
+    def beforeUpdate(){
+        if (isDirty('password')){
+            encodePassword()
+        }
+    }*/
 }
