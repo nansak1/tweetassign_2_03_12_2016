@@ -55,7 +55,7 @@ class AccountController extends RestfulController{
             //accounttoFollow.addToFollowers(accountId)
         }
         else {
-            respond(status:404, msg:'Error')
+            respond(status:404, msgError:'Error')
         }
 
 

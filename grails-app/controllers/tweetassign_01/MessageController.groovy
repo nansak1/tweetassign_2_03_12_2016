@@ -32,7 +32,12 @@ class MessageController extends RestfulController{
     {
         //given an account show the most recent messages first
         def accountId = params.accountId
-        def msgList = Message.listOrderByDateCreated(max: 10, order: "desc", acc:accountId)
+        def limit = params.int(max)
+        //def query = "from Message as m where m.acc=accountId order by m.dateCreated"
+        //def msgList = Message.findAll{query}
+        //def msgList = Message.findAll(acc: accountId)
+        //def messages = Message.findAll("from Message where author=${account.id} order by date_created", [max: 100])
+        def msgList = Message.listOrderByDateCreated(max: limit, order: "desc", acc:accountId)
         if (accountId){
             respond  msgList //as JSON
         }
@@ -44,13 +49,23 @@ class MessageController extends RestfulController{
     }
 
     @Override
-    def createResource(){
-        msg = params.msgText
-        accountId = params.accountId
+    def createResource() {
+        def msg = request.JSON.msgText
 
-        msg = new Message(msgText:msg, acc:accountId )
-        msg.save()
+        if (!msg) {
+            repond(status: 404, msgError: 'No messages')
+        } else {
+            def accountId = params.accountId
+            def accountHandle = params.accountHandle
 
+            if (accountHandle) {
+                accountId = Account.findByAccountHandle(params.accountHandle)
+
+            }
+
+            msg = new Message(msgText: msg, acc: accountId)
+            msg.save()
+        }
     }
 
 

@@ -12,6 +12,9 @@ class UrlMappings {
         "/accounts" (resources:'account')
         //"/messages" (resources:'message')
         //"/accounts/${accountId}/messages" (controller: 'message', action: "index", method: "GET")
+        "/accounts/$accountHandle/messages" (controller: 'message', action: "createResource", method: "POST")
+        "/accounts/$accountId/messages" (controller: 'message', action: "createResource", method: "POST")
+        "/accounts/$accountId/messages" (controller: 'message', action: "show", method: "GET")
         "/accounts"(resources:'account'){
             "/messages" (resources:'message')}
         //"/accounts/$accountId/messages"(controller: 'message', action: "show", method: "GET")
