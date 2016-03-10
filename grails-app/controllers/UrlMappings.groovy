@@ -1,3 +1,6 @@
+import tweetassign_01.Message
+import tweetassign_01.MessageController
+
 class UrlMappings {
 
     static mappings = {
@@ -7,8 +10,14 @@ class UrlMappings {
             }
         }
         "/accounts" (resources:'account')
-        "/messages" (resources:'message')
-        "/accounts" (resources:'account'){ "/messages" (resources:'message')/* "/accounts" (resources:'account')*/ }
+        //"/messages" (resources:'message')
+        //"/accounts/${accountId}/messages" (controller: 'message', action: "index", method: "GET")
+        "/accounts"(resources:'account'){
+            "/messages" (resources:'message')}
+        //"/accounts/$accountId/messages"(controller: 'message', action: "show", method: "GET")
+
+        "/accounts/$accountId/follow"(controller:'account', action:'follow')
+
 
 
         "/"(view:"/index")

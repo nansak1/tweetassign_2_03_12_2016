@@ -1,8 +1,6 @@
 package tweetassign_01
 
-//import grails.rest.Resource
 
-//@Resource(uri='/accounts')
 
 class Account {
 

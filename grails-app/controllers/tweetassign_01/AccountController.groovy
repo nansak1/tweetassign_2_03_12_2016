@@ -12,42 +12,55 @@ class AccountController extends RestfulController{
 
 
 
-   /* }*/
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond Account.list(params), model:[accountCount: Account.count()]
+    }
 
-    /*def get(){
-        def account = Account.get(params.id)
 
-        if (!account){
-            response.sendError(404)*/
-
-            /*if (account.hasErrors()){
-            //respond account.errors*/
-       /* }
-            else{
-            [account:account]
-        }
-    }*/
-@Override
+   @Override
    def show() {
+     def accountId = (params.id as String).isNumber()
 
-    def account = Account.get(params.id)
+     if (accountId){
+        respond Account.get(params.id)
+     }
+     else {
+        respond Account.findByAccountHandle(params.id)
+     }
 
-    def msgList = Message.listOrderByDateCreated(max: 10, order: "desc", acc: account)
-    //def msg = Message.findAll("from Message as m where m.account = :account", [acc: account])
-    def mssg = Message.findByAcc(acc: account)
 
-    if(account)
+    /*if(accountId)
     {
         //render account as JSON
         //render msgList as JSON
-        render mssg as JSON
+        render accountId as JSON
     }
     else{
-        response.status = 404
+
+        render(status:404, text:'No account found.')
+        //response.status = 404
         //respond  max(account.msg.)
-    }
+    }*/
 
    }
+
+    def follow(){
+        def accountId = params.accountId
+        def accountFollower = request.JSON
+
+        if (accountFollower/* && accountId && accountId != accounttoFollow*/)
+        {
+            accountId.addToFollowers(accountFollower)
+            //accounttoFollow.addToFollowers(accountId)
+        }
+        else {
+            respond(status:404, msg:'Error')
+        }
+
+
+
+    }
 
     /*def create() {
 
@@ -66,4 +79,6 @@ class AccountController extends RestfulController{
 
 
     }*/
+
+
 }
