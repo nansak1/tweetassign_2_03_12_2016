@@ -43,6 +43,8 @@ class BootStrap {
         def m18 = new Message(acc: a1, msgText: 'Hello World 12').save(failOnError: true)
         def m19 = new Message(acc: a1, msgText: 'Hello World 13').save(failOnError: true)
 
+        // Some stuff
+
 
     }
     def destroy = {
