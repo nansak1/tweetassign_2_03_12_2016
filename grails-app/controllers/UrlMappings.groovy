@@ -16,7 +16,7 @@ class UrlMappings {
         "/messages/searchText" (controller: 'message', action: "searchText", method: "GET")
 
         "/accounts/$accountId/followers"(controller: 'account', action: 'showFollower',method:"GET")
-        "/accounts/$accountId/recentFollowerMsg"(controller: 'account', action: 'showMostRecentMessage',method:"GET")
+        "/accounts/$accountId/feed"(controller: 'account', action: 'showRecentMessage',method:"GET")
         "/accounts/$accountId/follow"(controller:'account', action:'follow')
 
 

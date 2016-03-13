@@ -52,8 +52,8 @@ class FollowFunctionalTestSpec extends GebSpec{
         then:
         responseF4.status == 200
         responseF4.data[2].followingTotal == 2
-        responseF4.data[0].msgText = "It's getting better, infact it is warm"
-        responsef4.data[1].msgText = "Six for the one in our family room"
+        responseF4.data[0].msgText == "It's getting better, infact it is warm"
+        responsef4.data[1].msgText == "Six for the one in our family room"
     }
 
 

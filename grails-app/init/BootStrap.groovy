@@ -43,6 +43,13 @@ class BootStrap {
         def m18 = new Message(acc: a1, msgText: 'Hello World 12').save(failOnError: true)
         def m19 = new Message(acc: a1, msgText: 'Hello World 13').save(failOnError: true)
 
+        def m20 = new Message(msgText: "It's a tree.", acc: a4,dateCreated:"2016-03-13T19:48:58Z").save(failOnError: true)
+        def m21 = new Message(msgText: "Are you sure about that?.", acc: a1).save(failOnError: true)
+        def m22 = new Message(msgText: "Yes most certainly", acc: a4).save(failOnError: true)
+        def m23 = new Message(msgText: "How many do you have?", acc: a3).save(failOnError: true)
+        def m24 = new Message(msgText: "Six for the one in our family room", acc: a4,dateCreated:"2016-03-10T19:48:58Z").save(failOnError: true)
+        def m25 = new Message(msgText: "Ok, see you!", acc: a1,dateCreated:"2016-03-12T19:48:58Z").save(failOnError: true)
+
     }
     def destroy = {
     }
