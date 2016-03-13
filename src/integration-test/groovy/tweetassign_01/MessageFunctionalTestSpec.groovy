@@ -86,7 +86,7 @@ class MessageFunctionalTestSpec extends GebSpec{
         when:
 
         def text = 'Wor'
-        def responseM5 = restClient.get(path:"/messages/searchText/", query:[text:text])
+        def responseM5 = restClient.get(path:"/messages/searchText", query:[text:text])
         then:
         responseM5.status == 200
         responseM5.data.size == 15

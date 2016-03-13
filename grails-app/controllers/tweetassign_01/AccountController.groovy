@@ -27,12 +27,12 @@ class AccountController extends RestfulController{
    }
 
     def follow(){
-        def accountId = Account.findById(params.accountId)
-        def accountFollower = Account.findById(params.follower)
-        if (accountFollower && accountId && accountId != accountFollower)
+        def accountA = Account.findById(params.accountId)
+        def accountAFollower = Account.findById(params.follower)
+        if (accountAFollower && accountA && accountA != accountAFollower)
         {
-            accountId.addToFollowers(accountFollower)
-            render accountId as JSON
+            accountA.addToFollowers(accountAFollower)
+            render accountA as JSON
         }
         else {
             respond(status:404, msgError:'No followers')

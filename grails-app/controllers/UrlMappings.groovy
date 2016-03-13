@@ -10,18 +10,13 @@ class UrlMappings {
             }
         }
         "/accounts" (resources:'account')
-        //"/messages" (resources:'message')
-        //"/accounts/${accountId}/messages" (controller: 'message', action: "index", method: "GET")
-        //"/accounts/$accountHandle/messages" (controller: 'message', action: "createResource", method: "POST")
-       // "/accounts/$accountId/messages" (controller: 'message', action: "createResource", method: "POST")
-       // "/accounts/$accountId/messages" (controller: 'message', action: "show", method: "GET")
         "/accounts"(resources:'account'){
             "/messages" (resources:'message')}
+
         "/messages/searchText" (controller: 'message', action: "searchText", method: "GET")
+
         "/accounts/$accountId/followers"(controller: 'account', action: 'showFollower',method:"GET")
         "/accounts/$accountId/recentFollowerMsg"(controller: 'account', action: 'showMostRecentMessage',method:"GET")
-        //"/accounts/$accountId/messages"(controller: 'message', action: "show", method: "GET")
-
         "/accounts/$accountId/follow"(controller:'account', action:'follow')
 
 
