@@ -12,6 +12,7 @@ class MessageController extends RestfulController {
 
         super(Message)
     }
+
     /*   @Override
        protected Message queryForResource(Serializable id) {
            def accountId = params.accountId
@@ -20,6 +21,7 @@ class MessageController extends RestfulController {
                id == id && acc.id == accountId
            }.find()
        }*/
+
     @Override
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -51,29 +53,6 @@ class MessageController extends RestfulController {
             respond(status: 404, msg: "No message found")
         }
     }
-
-    /*  @Override
-     def show()
-      {
-          //given an account show the most recent messages first
-          def accountId
-          def accountInfo = (params.accountId as String).isNumber()
-          if (accountInfo){
-              accountId = Account.get(params.accountId)
-          }
-          else {
-              accountId = Account.findByAccountHandle(params.accountId)
-          }
-          def criteria = Account.get(accountId).msg
-          //def msgList = Message.findAll{query}
-          def msgList = Message.listOrderByDateCreated(max: params.max, order: "desc", offset:params.offset, acc:[id:accountId])
-          if (accountId){
-              respond  msgList //as JSON
-          }
-          else {
-              response.status = 404
-          }
-      }*/
 
     @Override
     def createResource() {
