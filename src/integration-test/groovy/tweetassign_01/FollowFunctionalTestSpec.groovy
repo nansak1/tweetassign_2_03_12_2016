@@ -28,34 +28,30 @@ class FollowFunctionalTestSpec extends GebSpec{
 
         when:
         def response = restClient.get(path:"/accounts")
-
         then:
         response.data.id
         response.status == 200
 
         when:
+        accountId = response.data[0].id
+        def followerId = response.data[1].id
+        def responseF1 = restClient.put(path:"/accounts/${accountId}/follow", query:[follower:followerId])
+        then:
+        responseF1.status == 200
+        responseF1.data.followers.size == 1
+    }
 
-        accountId = response.data[0].id //def UserA = new Account(fullName: 'Nayna', emailAddress: 'nay@nay.com', accountHandle:'nayna', accountPassword: 'h3Lloworld')
-        def UserB = response.data[1]
-
-        def json = UserB as JSON
-        //def responseB = restClient.post(path:"/accounts", body:json as String, requestContentType: 'application/json')
-        def responseA = restClient.post(path: "/accounts/${accountId}/follow", body: json as String, requestContentType: 'application/json')
-
-        //def response = restClient.get(path:'/accounts', body:json as String, requestContentType:'application/json')
+    def "F4: Create a ‘feed’ endpoint which will return the most recent messages by Accounts being followed by an Account. Include a response limit parameter. Include a parameter to only look for messages after a specified date."(){
+        when:
+        accountId = 4
+        def following
+        def date
+        def max = 2
+        def responseF5 = restClient.get(path:"/accounts/${accountId}", query:[following: following, max: max, date:date] )
 
         then:
-        responseA.status ==200
-       // HttpResponseException problem = thrown(HttpResponseException)
-       // problem.statusCode == 422
-       // problem.message
-       // responseA.status == 200
-        //responseA.data.id
-       // responseA.data.follow
-
-
-
-
+        responseF4.status == 200
+        responseF4.data[2].followingTotal == 2
     }
 
 

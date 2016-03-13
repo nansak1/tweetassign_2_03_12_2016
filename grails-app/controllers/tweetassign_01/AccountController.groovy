@@ -9,14 +9,10 @@ class AccountController extends RestfulController{
     AccountController(){
         super(Account)
     }
-
-
-
-    def index(Integer max) {
+  /*  def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Account.list(params), model:[accountCount: Account.count()]
-    }
-
+    }*/
 
    @Override
    def show() {
@@ -28,57 +24,18 @@ class AccountController extends RestfulController{
      else {
         respond Account.findByAccountHandle(params.id)
      }
-
-
-    /*if(accountId)
-    {
-        //render account as JSON
-        //render msgList as JSON
-        render accountId as JSON
-    }
-    else{
-
-        render(status:404, text:'No account found.')
-        //response.status = 404
-        //respond  max(account.msg.)
-    }*/
-
    }
 
     def follow(){
-        def accountId = params.accountId
-        def accountFollower = request.JSON
-
-        if (accountFollower/* && accountId && accountId != accounttoFollow*/)
+        def accountId = Account.findById(params.accountId)
+        def accountFollower = Account.findById(params.follower)
+        if (accountFollower && accountId && accountId != accountFollower)
         {
             accountId.addToFollowers(accountFollower)
-            //accounttoFollow.addToFollowers(accountId)
+            render accountId as JSON
         }
         else {
-            respond(status:404, msgError:'Error')
+            respond(status:404, msgError:'No followers')
         }
-
-
-
     }
-
-    /*def create() {
-
-        def response = restClient.get(path: '/accounts')
-
-
-        if (response.data.size == 0){
-                response.statusCode(422)
-                response.message("No account was created")
-
-            }
-            else {
-                [account:account]
-            }
-
-
-
-    }*/
-
-
 }
