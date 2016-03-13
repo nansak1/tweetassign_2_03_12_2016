@@ -13,9 +13,7 @@ import spock.lang.Stepwise
 @Integration
 @Stepwise
 
-/**
- * Created by nansak1 on 3/9/2016.
- */
+
 class MessageFunctionalTestSpec extends GebSpec{
 
     @Shared
@@ -27,96 +25,73 @@ class MessageFunctionalTestSpec extends GebSpec{
         restClient = new RESTClient(baseUrl)
     }
 
-
-
-   /* def 'M1_accountid: Create a REST endpoint will create a Message given a specified Account id and message text'(){
+    def 'M1_accountId: Create a REST endpoint will create a Message given a specified Account id and message text'(){
         when:
-
         def response = restClient.get(path:'/accounts')
-
         then:
         response.data.id
-        response.status = 200
+        response.status == 200
 
         when:
         def postBody = [msgText: 'Hello World!']
         accountId = response.data[0].id
-
         def json = postBody as JSON
         def responseM1 = restClient.post(path: "/accounts/${accountId}/messages", body: json as String, requestContentType:'application/json' )
-
         then:
+        responseM1.status == 201
         responseM1.data.msgText == 'Hello World!'
-        responseM1.data.acc.id == 1
-
-
     }
 
-    def 'M1_accountHandle: Create a REST endpoint will create a Message given a specified Account handle and message text'(){
+   def 'M1_accountHandle: Create a REST endpoint will create a Message given a specified Account handle and message text'(){
         when:
-
         def response = restClient.get(path:'/accounts')
-
         then:
         response.data.id
-        response.status = 200
+        response.status == 200
 
         when:
         def postBody = [msgText: 'Hello World!']
-        def accountHandle = response.data[0].accountHandle
-
+        def accountHandle = response.data[1].accountHandle
         def json = postBody as JSON
         def responseM1 = restClient.post(path: "/accounts/${accountHandle}/messages", body: json as String, requestContentType:'application/json' )
 
         then:
+        responseM1.status == 201
         responseM1.data.msgText == 'Hello World!'
-        responseM1.data.acc.accountHandle == 'w'
 
+    }
 
-    }*/
+    def "M3:Create a REST endpoint that will return the most recent messages for an Account. The endpoint must honor a limit parameter that caps the number of responses. The default limit is 10. (data-driven test) #description"(){
+       when:
+       accountId = 1
+       def max = 2
+       def responseM3 = restClient.get(path:"/accounts/${accountId}/messages", query:[max:max])
+       then:
+       responseM3.status == 200
+       responseM3.data.size == 2
+    }
 
-
-
-  /*  def 'M3: Create a REST endpoint that will return the most recent messages for an Account. The endpoint must honor a limit parameter that caps the number of responses. The default limit is 10. (data-driven test) #description'() {
+    def 'M4: Support an offset parameter into the recent Messages endpoint to provide paged responses'(){
         when:
         accountId = 1
-        def response = restClient.get(path: "/accounts/${accountId}")
-
+        def offset = 2
+        def responseM4 = restClient.get(path:"/accounts/${accountId}/messages", query:[offset:offset])
         then:
-        response.status == 200
-        response.data.id == 1
+        responseM4.status == 200
 
-    }*/
+    }
 
-    def "M3:Messages for an account"(){
+    def "M5: Create a REST endpoint that will search for messages containing a specified search term. Each response value will be a JSON object containing the Message details (text, date) as well as the Account (handle)"(){
 
-      when:
-       accountId = 1
-        def max
-       //def limit = 12
-       def responseM = restClient.get(path:"/accounts/${accountId}/messages/${accountId}")
-      //def responseM = restClient.get(path:"/accounts/${accountId}/messages/${accountId}?(.$max:2)?")
+        when:
 
+        def text = 'Wor'
+        def responseM5 = restClient.get(path:"/messages/searchText/", query:[text:text])
+        then:
+        responseM5.status == 200
+        responseM5.data.size == 15
 
-       then:
-       //responseM.status == 200
-       //responseM.data
-       //response.data.size == 2
-
-       /*  then:
-      response.data.size()
-      response.data.msg
-      response.data.dateCreated*/
-
-
-    HttpResponseException problem = thrown(HttpResponseException)
-    problem.statusCode == 404
-    problem.message
-
-
-
-
-     }
+    }
 
 
 
