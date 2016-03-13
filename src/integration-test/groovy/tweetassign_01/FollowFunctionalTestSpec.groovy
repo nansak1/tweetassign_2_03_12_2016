@@ -41,13 +41,36 @@ class FollowFunctionalTestSpec extends GebSpec{
         responseF1.data.followers.size == 1
     }
 
+    def "F2: For the endpoint created for requirement A3, add properties for total counts of followers and following for the account."() {
+        when:
+        def resp = restClient.get(path: "/accounts/${account_handle}")
+        then:
+        resp.status == 200
+        resp.data.followersTotal == followersTotal
+        resp.data.followingTotal == followingTotal
+        where:
+        description            | account_handle | followingTotal | followersTotal
+        "first account shown"  | 'richelliot'   | 0              | 1
+        "second account shown" | 'donaldtrump'  | 0              | 0
+        "third account shown"  | 'jacquekult'   | 1              | 1
+        "fourth account shown" | 'jeremyn'      | 1              | 2
+        "fifth account shown"  | 'kkadeshian'   | 2              | 4
+
+    }
+
+    def "F3:Add an endpoint to get the followers for an account. This will return the details about the followers (handle, name, email, id). Add the limit and offset logic implemented for messages to this endpoint."(){
+        when:
+        def resp=restClient.get(path:"/accounts/donaldtrump/followers")
+        then:
+        resp.status==200
+
+    }
     def "F4: Create a ‘feed’ endpoint which will return the most recent messages by Accounts being followed by an Account. Include a response limit parameter. Include a parameter to only look for messages after a specified date."(){
         when:
         accountId = 4
-        def following
         def date
-        def max = 2
-        def responseF5 = restClient.get(path:"/accounts/${accountId}", query:[following: following, max: max, date:date] )
+        def max = 0
+        def responseF5 = restClient.get(path:"/accounts/${accountId}/feed", query:[max: max, date:date] )
 
         then:
         responseF4.status == 200
