@@ -61,6 +61,39 @@ class MessageFunctionalTestSpec extends GebSpec{
 
     }
 
+    //def "M2: Return an error response from the create Message endpoint if user is not found or message text is not valid (data-driven test)"()
+
+    def "M2 (invalid text): Return an error response from the create Message endpoint if message text is not valid (data-driven test)"() {
+        given:
+        def newAccount = new Account(accountHandle: accountHandle, fullName: fullName, emailAddress: emailAddress, accountPassword: 'msse2016ASSIGN')
+        def json = newAccount as JSON
+
+        when: 'Account is created'
+        def accountResponse = restClient.post(path: '/accounts', body: json as String, requestContentType: 'application/json')
+
+        then:
+        accountResponse.status == 201
+        accountResponse.data.id
+
+        when: 'Message is created'
+        newAccount.id = accountResponse.data.id
+        def message = new Message(msgText: messageText, acc: newAccount)
+        json = message as JSON
+        def messageResponse = restClient.post(path: '/messages', body: json as String, requestContentType: 'application/json')
+
+        then:
+        HttpResponseException problem = thrown(HttpResponseException)
+        problem.statusCode == 404
+        problem.message
+
+        where:
+        description             | messageText | accountHandle | fullName         | emailAddress
+        'Message text too long' | 'W' * 41    | 'jakinyi'     | 'Janet Akinyi'   | 'jakinyi@umn.edu'
+        'Empty message text'    | ''          | 'bchris'      | 'Chris Brown'    | 'chrisbrown@umn.edu'
+        'Null message'          | null        | 'bspears'     | 'Britney Spears' | 'bspears@umn.edu'
+    }
+
+
     def "M3:Create a REST endpoint that will return the most recent messages for an Account. The endpoint must honor a limit parameter that caps the number of responses. The default limit is 10. (data-driven test) #description"(){
        when:
        accountId = 1

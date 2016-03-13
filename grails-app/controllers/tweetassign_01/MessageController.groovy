@@ -50,7 +50,7 @@ class MessageController extends RestfulController {
             }
             render searchResult as JSON
         } else {
-            respond(status: 404, msg: "No message found")
+            respond(status: 200, msg: "No message found")
         }
     }
 
@@ -59,7 +59,7 @@ class MessageController extends RestfulController {
         def accountId
         def msg = request.JSON.msgText
         if (!msg) {
-            respond(status: 404, msgError: 'No messages')
+            respond(status: 200, msgError: 'No messages')
         } else {
             def accountInfo = (params.accountId as String).isNumber()
             if (accountInfo) {

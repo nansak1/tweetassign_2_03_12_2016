@@ -35,7 +35,7 @@ class AccountController extends RestfulController{
             render accountA as JSON
         }
         else {
-            respond(status:404, msgError:'No followers')
+            respond(status:200, msgError:'No followers')
         }
     }
 
