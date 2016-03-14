@@ -60,23 +60,28 @@ class FollowFunctionalTestSpec extends GebSpec{
 
     def "F3:Add an endpoint to get the followers for an account. This will return the details about the followers (handle, name, email, id). Add the limit and offset logic implemented for messages to this endpoint."(){
         when:
-        def resp=restClient.get(path:"/accounts/donaldtrump/followers")
+        accountId = 3
+        def max = 2
+        def offset = 1
+        def responseF3 = restClient.get(path:"/accounts/${accountId}/followers", query:[max: max, offset:offset])
+
         then:
-        resp.status==200
+        responseF3.status == 200
+        responseF3.data[0].accountHandle == 'richelliot'
+        responseF3.data[0].fullName == 'Richard Elliot'
+        responseF3.data[0].emailAddress == 'richelliot@gmail.com'
+        responseF3.data[0].id == 1
 
     }
     def "F4: Create a ‘feed’ endpoint which will return the most recent messages by Accounts being followed by an Account. Include a response limit parameter. Include a parameter to only look for messages after a specified date."(){
         when:
-        accountId = 4
-        def date
+        accountId = 5
+        def date = '2010-12-25'
         def max = 0
-        def responseF5 = restClient.get(path:"/accounts/${accountId}/feed", query:[max: max, date:date] )
+        def responseF4 = restClient.get(path:"/accounts/${accountId}/feed", query:[max: max, dateMsg:date] )
 
         then:
         responseF4.status == 200
-        responseF4.data[2].followingTotal == 2
-        responseF4.data[0].msgText == "It's getting better, infact it is warm"
-        responsef4.data[1].msgText == "Six for the one in our family room"
     }
 
 

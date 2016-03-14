@@ -16,8 +16,8 @@ class BootStrap {
 
         def a1 = new Account(accountHandle: 'richelliot', fullName: 'Richard Elliot', emailAddress: 'richelliot@gmail.com', accountPassword: 'msse2016ASSIGN').save(failOnError: true)
         def a2 = new Account(accountHandle: 'donaldtrump', fullName: 'Donald Trump', emailAddress: 'dtrump@trumpmag.com', accountPassword: 'msse2016ASSIGN').save(failOnError: true)
-        def a3 = new Account(accountHandle: 'jacquekult', fullName: 'Jacqualine Kimtai', emailAddress: 'jkimtaii@umn.edu', accountPassword: 'msse2016ASSIGN', followers: a1, following: a1).save(failOnError: true)
-        def a4 = new Account(accountHandle: 'jeremyn', fullName: 'Jeremy Nathan', emailAddress: 'jnath@umn.edu', accountPassword: 'msse2016ASSIGN', followers: [a1, a3], following: a2).save(failOnError: true)
+        def a3 = new Account(accountHandle: 'jacquekult', fullName: 'Jacqualine Kimtai', emailAddress: 'jkimtaii@umn.edu', accountPassword: 'msse2016ASSIGN', followers:[a1], following: [a1]).save(failOnError: true)
+        def a4 = new Account(accountHandle: 'jeremyn', fullName: 'Jeremy Nathan', emailAddress: 'jnath@umn.edu', accountPassword: 'msse2016ASSIGN', followers: [a1, a3], following: [a2]).save(failOnError: true)
         def a5 = new Account(accountHandle: 'kkadeshian', fullName: 'Kim Kadeshian', emailAddress: 'kkadeshian@umn.edu', accountPassword: 'msse2016ASSIGN', followers: [a1, a2, a3, a4], following: [a2, a4]).save(failOnError: true)
         def a6 = new Account(accountHandle: 'w', fullName: 'nay na', emailAddress:'a@com', accountPassword:'msse2016ASSIGN').save(failOnError: true)
         def a7 = new Account(accountHandle: 'wa', fullName: 'nay na', emailAddress:'ab@com', accountPassword:'msse2016ASSIGN').save(failOnError: true)
