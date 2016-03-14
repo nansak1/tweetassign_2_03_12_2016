@@ -36,7 +36,7 @@ class MessageController extends RestfulController {
             def msgList = Message.findAllByAcc(accountId, [max: params.max, sort: accountId.msg.dateCreated, order: "desc", offset: params.offset, text: params.text])
             respond msgList
         } else {
-            respond(status: 404, msgError: "No message found")
+            respond(status: 200, msgError: "No message found")
         }
     }
 

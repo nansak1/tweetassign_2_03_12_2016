@@ -107,10 +107,13 @@ class MessageFunctionalTestSpec extends GebSpec{
     def 'M4: Support an offset parameter into the recent Messages endpoint to provide paged responses'(){
         when:
         accountId = 1
-        def offset = 2
-        def responseM4 = restClient.get(path:"/accounts/${accountId}/messages", query:[offset:offset])
+        def offset = 1
+        def max = 2
+        def responseM4 = restClient.get(path:"/accounts/${accountId}/messages", query:[max:max, offset:offset])
         then:
         responseM4.status == 200
+        responseM4.data[0].id == 3
+        responseM4.data[1].id == 5
 
     }
 
@@ -118,12 +121,13 @@ class MessageFunctionalTestSpec extends GebSpec{
 
         when:
 
-        def text = 'Wor'
+        def text = 'Atl'
         def responseM5 = restClient.get(path:"/messages/searchText", query:[text:text])
         then:
         responseM5.status == 200
-        responseM5.data.size == 15
-
+        responseM5.data.size == 1
+        responseM5.data[0].msgText == "Welcome to Atlanta"
+        responseM5.data[0].accountHandle == "richelliot"
     }
 
 
