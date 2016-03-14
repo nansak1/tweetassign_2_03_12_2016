@@ -54,7 +54,7 @@ class AccountController extends RestfulController {
         def accountId = (params.accountId as String).isNumber()
 
         if (accountId) {
-            def newAccount = Account.findById(params.accountId)
+
             def queryTxt
             def msgResults
             if (!params.dateMsg) {
