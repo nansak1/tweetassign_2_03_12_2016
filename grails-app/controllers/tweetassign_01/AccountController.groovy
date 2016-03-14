@@ -12,10 +12,6 @@ class AccountController extends RestfulController {
     AccountController() {
         super(Account)
     }
-    /*  def index(Integer max) {
-          params.max = Math.min(max ?: 10, 100)
-          respond Account.list(params), model:[accountCount: Account.count()]
-      }*/
 
     @Override
     def show() {
@@ -59,24 +55,15 @@ class AccountController extends RestfulController {
 
         if (accountId) {
             def newAccount = Account.findById(params.accountId)
-            def followingAccount = Account.where { id in newAccount.following.id }.list()
-            //def msgResults=Message.findAllByAcc(followingAccount)
             def queryTxt
             def msgResults
-            //def msgResults=Message.findAllByAcc(results)
             if (!params.dateMsg) {
                 queryTxt = "select a.accountHandle,m.msgText,m.dateCreated from Message m, Account a where " +
                         "m.acc.id=a.id and m.acc.id in (select b.id from Account a inner join a.following b " +
                         "where a.id=${params.accountId}) and m.id=(select max(m.id) from Message m where m.acc.id=a.id)"
                 msgResults = Message.executeQuery(queryTxt, [max: params.max])
             } else {
-
-                //def newDate=Date.parse('YYYY-MM-dd', params.dateMsg)
-
-                //def newDate=new SimpleDateFormat("dd-MM-yyyy").parse(utilities.convertDateString(params.dateMsg));
                 def inputDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.dateMsg)
-
-                //def newDate=Date.parse("y-M-d",params.dateCreated)
                 queryTxt = "select a.accountHandle,m.msgText,m.dateCreated from Message m, " +
                         "Account a where m.acc.id=a.id and m.acc.id in (select b.id from Account a " +
                         "inner join a.following b where a.id=${params.accountId}) and trunc(m.dateCreated)>=trunc(:dateEntry) " +
@@ -88,10 +75,7 @@ class AccountController extends RestfulController {
             render results as JSON
 
         } else {
-            def newAccount = Account.findByAccountHandle(params.accountId)
-            def results = newAccount.where { id in newAccount.following.id }.list(max: 10, offset: 0)
-            def msgResults = Message.findAllByAcc(results)
-            respond results
+            respond (status:200,msgError:"Invalid Account ID" )
         }
 
     }
