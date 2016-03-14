@@ -3,39 +3,39 @@ package tweetassign_01
 import grails.converters.JSON
 import grails.rest.RestfulController
 
-class AccountController extends RestfulController{
+import java.text.SimpleDateFormat
+
+class AccountController extends RestfulController {
 
     static responseFormats = ['json', 'xml']
-    AccountController(){
+
+    AccountController() {
         super(Account)
     }
-  /*  def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Account.list(params), model:[accountCount: Account.count()]
-    }*/
+    /*  def index(Integer max) {
+          params.max = Math.min(max ?: 10, 100)
+          respond Account.list(params), model:[accountCount: Account.count()]
+      }*/
 
-   @Override
-   def show() {
-     def accountId = (params.id as String).isNumber()
+    @Override
+    def show() {
+        def accountId = (params.id as String).isNumber()
 
-     if (accountId){
-        respond Account.get(params.id)
-     }
-     else {
-        respond Account.findByAccountHandle(params.id)
-     }
-   }
+        if (accountId) {
+            respond Account.get(params.id)
+        } else {
+            respond Account.findByAccountHandle(params.id)
+        }
+    }
 
-    def follow(){
+    def follow() {
         def accountA = Account.findById(params.accountId)
         def accountAFollower = Account.findById(params.follower)
-        if (accountAFollower && accountA && accountA != accountAFollower)
-        {
+        if (accountAFollower && accountA && accountA != accountAFollower) {
             accountA.addToFollowers(accountAFollower)
             render accountA as JSON
-        }
-        else {
-            respond(status:200, msgError:'No followers')
+        } else {
+            respond(status: 200, msgError: 'No followers')
         }
     }
 
@@ -62,16 +62,27 @@ class AccountController extends RestfulController{
             def followingAccount = Account.where { id in newAccount.following.id }.list()
             //def msgResults=Message.findAllByAcc(followingAccount)
             def queryTxt
+            def msgResults
             //def msgResults=Message.findAllByAcc(results)
-            if (!params.dateCreated) {
-                queryTxt = "select a.accountHandle,m.msgText,m.dateCreated from Message m, Account a where m.acc.id=a.id and m.acc.id in (select b.id from Account a inner join a.following b where a.id=${params.accountId}) and m.id=(select max(m.id) from Message m where m.acc.id=a.id)"
+            if (!params.dateMsg) {
+                queryTxt = "select a.accountHandle,m.msgText,m.dateCreated from Message m, Account a where " +
+                        "m.acc.id=a.id and m.acc.id in (select b.id from Account a inner join a.following b " +
+                        "where a.id=${params.accountId}) and m.id=(select max(m.id) from Message m where m.acc.id=a.id)"
+                msgResults = Message.executeQuery(queryTxt, [max: params.max])
             } else {
 
-                def newDate=Date.parse("y-M-d",params.dateCreated)
-                queryTxt = "select a.accountHandle,m.msgText,m.dateCreated from Message m, Account a where m.acc.id=a.id and m.acc.id in (select b.id from Account a inner join a.following b where a.id=${params.accountId}) and m.dateCreated='${params.dateCreated}' and m.id=(select max(m.id) from Message m where m.acc.id=a.id)"
-            }
+                //def newDate=Date.parse('YYYY-MM-dd', params.dateMsg)
 
-            def msgResults = Message.executeQuery(queryTxt)
+                //def newDate=new SimpleDateFormat("dd-MM-yyyy").parse(utilities.convertDateString(params.dateMsg));
+                def inputDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.dateMsg)
+
+                //def newDate=Date.parse("y-M-d",params.dateCreated)
+                queryTxt = "select a.accountHandle,m.msgText,m.dateCreated from Message m, " +
+                        "Account a where m.acc.id=a.id and m.acc.id in (select b.id from Account a " +
+                        "inner join a.following b where a.id=${params.accountId}) and trunc(m.dateCreated)>=trunc(:dateEntry) " +
+                        "and m.id=(select max(m.id) from Message m where m.acc.id=a.id)"
+                msgResults = Message.executeQuery(queryTxt, [dateEntry: inputDate], [max: params.max])
+            }
 
             def results = msgResults.collect { res -> ['accountHandle': res[0], 'msgText': res[1], 'dateCreated': res[2]] }
             render results as JSON
