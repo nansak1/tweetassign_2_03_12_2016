@@ -25,11 +25,11 @@ class UrlMappings {
         "500"(view:'/error')
         "404"(view:'/notFound')
 
-        /*
+
     "500"(controller: 'Error', action: 'internalServerError')
     "404"(controller: 'Error', action: 'notFound')
     "401"(controller: 'Error', action: 'unauthorized')
     "403"(controller: 'Error', action: 'forbidden')
-    */
+
     }
 }

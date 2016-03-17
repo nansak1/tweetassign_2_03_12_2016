@@ -67,6 +67,7 @@ dependencies {
 
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
+    testCompile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7'
 
     // Note: It is recommended to update to a more robust driver (Chrome, Firefox etc.)
     testRuntime 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.44.0'
@@ -75,8 +76,8 @@ dependencies {
     console "org.grails:grails-console"
 
     //Spring REST security
-    //compile 'org.grails.plugins:spring-security-rest:2.0.0.M2'
-    //compile 'org.grails.plugins:spring-security-rest-gorm:2.0.0.M2'
+    compile 'org.grails.plugins:spring-security-rest:2.0.0.M2'
+    compile 'org.grails.plugins:spring-security-rest-gorm:2.0.0.M2'
 }
 
 task wrapper(type: Wrapper) {

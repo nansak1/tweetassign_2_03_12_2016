@@ -1,6 +1,9 @@
 import grails.converters.JSON
+import org.apache.tomcat.jni.User
 import tweetassign_01.Account
 import tweetassign_01.Message
+import tweetassign_01.Role
+import tweetassign_01.UserRole
 
 class BootStrap {
 
@@ -14,6 +17,13 @@ class BootStrap {
 
     def init = { servletContext ->
 
+        //roles
+        def admin = new User(username:'admin', password:'r00t!' ).save(flush:true, failOnError: true)
+        def role = new Role (authority: 'ROLE_READ').save(flush:true, failOnError: true)
+        new UserRole(user: admin, role:role). save(flush:true, failOnError: true)
+
+
+        // account information
         def a1 = new Account(accountHandle: 'richelliot', fullName: 'Richard Elliot', emailAddress: 'richelliot@gmail.com', accountPassword: 'msse2016ASSIGN').save(failOnError: true)
         def a2 = new Account(accountHandle: 'donaldtrump', fullName: 'Donald Trump', emailAddress: 'dtrump@trumpmag.com', accountPassword: 'msse2016ASSIGN').save(failOnError: true)
         def a3 = new Account(accountHandle: 'jacquekult', fullName: 'Jacqualine Kimtai', emailAddress: 'jkimtaii@umn.edu', accountPassword: 'msse2016ASSIGN', followers:[a1], following: [a1]).save(failOnError: true)
@@ -23,6 +33,7 @@ class BootStrap {
         def a7 = new Account(accountHandle: 'wa', fullName: 'nay na', emailAddress:'ab@com', accountPassword:'msse2016ASSIGN').save(failOnError: true)
         def a8 = new Account(accountHandle: 'wal', fullName: 'nay na', emailAddress:'abc@com', accountPassword:'msse2016ASSIGN').save(failOnError: true)
 
+        //messages
         def m1 = new Message(msgText: "Welcome to Atlanta", acc: a1).save(failOnError: true)
         def m2 = new Message(msgText: "Welcome to Minnesota", acc: a2).save(failOnError: true)
         def m3 = new Message(msgText: "How is the weather out there?", acc: a1).save(failOnError: true)
@@ -42,7 +53,6 @@ class BootStrap {
         def m17 = new Message(acc: a1, msgText: 'Hello World 11').save(failOnError: true)
         def m18 = new Message(acc: a1, msgText: 'Hello World 12').save(failOnError: true)
         def m19 = new Message(acc: a1, msgText: 'Hello World 13').save(failOnError: true)
-
         def m20 = new Message(msgText: "It's a tree.", acc: a4).save(failOnError: true)
         def m21 = new Message(msgText: "Are you sure about that?.", acc: a1).save(failOnError: true)
         def m22 = new Message(msgText: "Yes most certainly", acc: a4).save(failOnError: true)

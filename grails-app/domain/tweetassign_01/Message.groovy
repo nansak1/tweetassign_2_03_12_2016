@@ -3,6 +3,9 @@ package tweetassign_01
 
 
 class Message {
+
+
+
     String msgText
     Date dateCreated
     static hasOne = [acc: Account]
