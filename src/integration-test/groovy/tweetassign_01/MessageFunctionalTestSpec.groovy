@@ -1,6 +1,5 @@
 package tweetassign_01
 
-import grails.converters.JSON
 import geb.spock.GebSpec
 import grails.converters.JSON
 import grails.test.mixin.integration.Integration
@@ -9,10 +8,8 @@ import groovyx.net.http.RESTClient
 import spock.lang.Shared
 import spock.lang.Stepwise
 
-
 @Integration
 @Stepwise
-
 
 class MessageFunctionalTestSpec extends GebSpec{
 
@@ -34,7 +31,7 @@ class MessageFunctionalTestSpec extends GebSpec{
 
         when:
         def postBody = [msgText: 'Hello World!']
-        accountId = response.data[0].id
+        accountId = (response.data as List)[0].id
         def json = postBody as JSON
         def responseM1 = restClient.post(path: "/accounts/${accountId}/messages", body: json as String, requestContentType:'application/json' )
         then:
@@ -51,7 +48,7 @@ class MessageFunctionalTestSpec extends GebSpec{
 
         when:
         def postBody = [msgText: 'Hello World!']
-        def accountHandle = response.data[1].accountHandle
+        def accountHandle = (response.data as List)[1].accountHandle
         def json = postBody as JSON
         def responseM1 = restClient.post(path: "/accounts/${accountHandle}/messages", body: json as String, requestContentType:'application/json' )
 
@@ -60,8 +57,6 @@ class MessageFunctionalTestSpec extends GebSpec{
         responseM1.data.msgText == 'Hello World!'
 
     }
-
-    //def "M2: Return an error response from the create Message endpoint if user is not found or message text is not valid (data-driven test)"()
 
     def "M2 (invalid text): Return an error response from the create Message endpoint if message text is not valid (data-driven test)"() {
         given:
@@ -79,7 +74,7 @@ class MessageFunctionalTestSpec extends GebSpec{
         newAccount.id = accountResponse.data.id
         def message = new Message(msgText: messageText, acc: newAccount)
         json = message as JSON
-        def messageResponse = restClient.post(path: '/messages', body: json as String, requestContentType: 'application/json')
+        restClient.post(path: '/messages', body: json as String, requestContentType: 'application/json')
 
         then:
         HttpResponseException problem = thrown(HttpResponseException)
@@ -93,12 +88,12 @@ class MessageFunctionalTestSpec extends GebSpec{
         'Null message'          | null        | 'bspears'     | 'Britney Spears' | 'bspears@umn.edu'
     }
 
-
     def "M3:Create a REST endpoint that will return the most recent messages for an Account. The endpoint must honor a limit parameter that caps the number of responses. The default limit is 10. (data-driven test) #description"(){
        when:
        accountId = 1
        def max = 2
        def responseM3 = restClient.get(path:"/accounts/${accountId}/messages", query:[max:max])
+
        then:
        responseM3.status == 200
        responseM3.data.size == 2
@@ -110,27 +105,22 @@ class MessageFunctionalTestSpec extends GebSpec{
         def offset = 1
         def max = 2
         def responseM4 = restClient.get(path:"/accounts/${accountId}/messages", query:[max:max, offset:offset])
+
         then:
         responseM4.status == 200
-        responseM4.data[0].id == 3
-        responseM4.data[1].id == 5
-
+        (responseM4.data as List)[0].id == 3
+        (responseM4.data as List)[1].id == 5
     }
 
-    def "M5: Create a REST endpoint that will search for messages containing a specified search term. Each response value will be a JSON object containing the Message details (text, date) as well as the Account (handle)"(){
-
+    def "M5: Create a REST endpoint that will search for messages containing a specified search term. Each response value will be a JSON object containing the Message details (text, date) as well as the Account (handle)"() {
         when:
-
         def text = 'Atl'
         def responseM5 = restClient.get(path:"/messages/searchText", query:[text:text])
+
         then:
         responseM5.status == 200
         responseM5.data.size == 1
-        responseM5.data[0].msgText == "Welcome to Atlanta"
-        responseM5.data[0].accountHandle == "richelliot"
+        (responseM5.data as List)[0].msgText == "Welcome to Atlanta"
+        (responseM5.data as List)[0].accountHandle == "richelliot"
     }
-
-
-
-
 }
