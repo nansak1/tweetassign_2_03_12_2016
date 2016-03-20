@@ -9,7 +9,8 @@ class UrlMappings {
                 // apply constraints here
             }
         }
-        "/accounts" (resources:'account')
+
+        "/api/accounts" (resources:'account')
         "/accounts"(resources:'account'){
             "/messages" (resources:'message')}
 
@@ -22,8 +23,8 @@ class UrlMappings {
 
 
         "/"(view:"/index")
-        "500"(view:'/error')
-        "404"(view:'/notFound')
+       /* "500"(view:'/error')
+        "404"(view:'/notFound')*/
 
 
     "500"(controller: 'Error', action: 'internalServerError')

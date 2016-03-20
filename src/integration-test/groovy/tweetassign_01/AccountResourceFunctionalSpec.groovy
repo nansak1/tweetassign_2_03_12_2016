@@ -36,12 +36,12 @@ class AccountResourceFunctionalSpec extends GebSpec{
         problem.message.contains('Forbidden')
     }
 
-    def 'passing a valid username and password generates a token'(){
+   /*def 'passing a valid username and password generates a token'(){
         setup:
-        def wuthernication =([username:'admin', password:'r00t!'] as JSON) as String
+        def authentication =([username:'admin', password:'r00t!'] as JSON) as String
 
         when:
-        def response = restClient.post(path:'/api/login', body: authentication, requestContentType: 'application/json')
+        def response = restClient.post(path:'/login', body: authentication, requestContentType: 'application/json')
 
         then:
         response.status == 200
@@ -51,12 +51,16 @@ class AccountResourceFunctionalSpec extends GebSpec{
         //noinspection GroovyDoubleNegation
         !!(token = response.data.access_token)
 
-    }
+    }*/
 
     def 'using token to account endpoint allowed'(){
 
         when:
-        def response = restClient.get(path:'api/accounts', headers: ['X-Auth-Token':token])
+        def response = restClient.get(path:'/accounts', headers: ['X-Auth-Token':token])
+
+        then:
+        response.status == 200
+        response.data.size() == 0
 
 
     }
