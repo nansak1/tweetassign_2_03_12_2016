@@ -2,7 +2,7 @@ package tweetassign_01
 
 class UserRole {
 
-    User user
+    Account user
     Role role
 
     static constraints = {

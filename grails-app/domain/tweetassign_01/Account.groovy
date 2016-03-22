@@ -4,13 +4,13 @@ package tweetassign_01
 
 class Account {
 
-    /*transient springSecurityService*/
+    transient springSecurityService
 
     String accountHandle
     String fullName
     String emailAddress
     String accountPassword
-    /*boolean enabled = true
+    boolean enabled = true
     boolean accountExpired = false
     boolean accountLocked = false
     boolean passwordExpired = false
@@ -33,7 +33,7 @@ class Account {
         accountPassword = springSecurityService?.passwordEncoder ?
                 springSecurityService.encodePassword(accountPassword): accountPassword
     }
-*/
+
 
     static hasMany=[msg:Message,followers:Account,following:Account]
     static constraints = {

@@ -3,7 +3,7 @@ package tweetassign_01
 class AuthenticationToken {
 
     String tokenValue
-    String username
+    String accountHandle
 
     static mapping = {
         version false

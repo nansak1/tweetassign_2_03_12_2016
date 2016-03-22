@@ -1,5 +1,5 @@
 import grails.converters.JSON
-import tweetassign_01.User
+
 import tweetassign_01.Account
 import tweetassign_01.Message
 import tweetassign_01.Role
@@ -19,9 +19,9 @@ class BootStrap {
 
         //roles
 
-            def admin = new User(username: 'admin', password: 'r00t!').save(flush: true, failOnError: true)
+            def admin = new Account(accountHandle:'admin', fullName: 'Admin', emailAddress: 'admin@twtr.com', accountPassword:'msse2016ASSIGN').save(flush: true, failOnError: true)
             def role = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
-            //new UserRole(user: admin, role: role).save(flush: true, failOnError: true)
+            new UserRole(user: admin, role: role).save(flush: true, failOnError: true)
 
 
 /*
