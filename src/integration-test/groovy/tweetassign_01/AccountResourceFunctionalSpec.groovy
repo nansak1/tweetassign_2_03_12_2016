@@ -38,10 +38,10 @@ class AccountResourceFunctionalSpec extends GebSpec{
 
    def 'passing a valid username and password generates a token'(){
         setup:
-        def authentication =([accountHandle:'admin', accountPassword:'msse2016ASSIGN'] as JSON) as String
+        def authentication =([username:'admin', password:'msse2016ASSIGN'] as JSON) as String
 
         when:
-        def response = restClient.post(path:'/api/login', body: authentication, requestContentType: 'application/json')
+        def response = restClient.post(path:"/api/login", body: authentication, requestContentType: 'application/json')
 
         then:
         response.status == 200
@@ -56,7 +56,7 @@ class AccountResourceFunctionalSpec extends GebSpec{
     def 'using token to account endpoint allowed'(){
 
         when:
-        def response = restClient.get(path:'/accounts', headers: ['X-Auth-Token':token])
+        def response = restClient.get(path:"/accounts", headers: ['X-Auth-Token':token])
 
         then:
         response.status == 200

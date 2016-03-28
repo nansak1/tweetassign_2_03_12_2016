@@ -5,7 +5,7 @@ class ErrorController {
    /* def index() {}*/
 
     def internalServerError(){
-        reponse.status =500
+        reponse.status = 500
         render(contentType:'application/json'){
             error = response.status
             message ='Internal server error'

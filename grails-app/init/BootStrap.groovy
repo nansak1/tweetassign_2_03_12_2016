@@ -5,6 +5,7 @@ import tweetassign_01.Message
 import tweetassign_01.Role
 import tweetassign_01.UserRole
 
+
 class BootStrap {
 
     def jsonMarshAcc = JSON.registerObjectMarshaller(Account) {

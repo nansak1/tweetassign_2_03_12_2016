@@ -2,6 +2,9 @@ package tweetassign_01
 import grails.test.mixin.integration.Integration
 import grails.transaction.*
 import spock.lang.*
+
+
+@Ignore
 @Integration
 @Rollback
 class AccountIntegrationTestSpec extends Specification {
