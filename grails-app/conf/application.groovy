@@ -21,6 +21,7 @@ grails.plugin.springsecurity.rest.token.validation.headerName = 'X-Auth-Token'
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'tweetassign_01.Account'
 
 grails.plugin.springsecurity.userLookup.usernamePropertyName = 'accountHandle'
+grails.plugin.springsecurity.password.algorithm ='MD5'
 grails.plugin.springsecurity.userLookup.passwordPropertyName = 'accountPassword'
 
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'tweetassign_01.UserRole'

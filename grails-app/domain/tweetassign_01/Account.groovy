@@ -20,6 +20,7 @@ class Account {
     }
 
     def beforeInsert(){
+        //encodePassword()
 
     }
 
