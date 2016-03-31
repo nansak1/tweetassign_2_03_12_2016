@@ -12,7 +12,7 @@ class WelcomePageFunctionalSpec extends GebSpec{
 
     def 'welcome page displays welcome message'() {
         when:
-        go 'http://localhost:8080'
+        go '/'
 
         then: 'Static welcome displayed properly'
         $('h1').first().text() == 'Welcome to the sample Grails 3 Angular App'
