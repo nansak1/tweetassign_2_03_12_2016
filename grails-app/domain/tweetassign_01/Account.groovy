@@ -1,7 +1,6 @@
 package tweetassign_01
 
-import grails.plugin.springsecurity.authentication.encoding.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
+
 
 
 class Account {
@@ -17,7 +16,7 @@ class Account {
     boolean accountLocked = false
     boolean passwordExpired = false
 
-    //PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
     Set<Role> getAuthorities(){
         UserRole.findAllByUser(this)*.role
@@ -38,10 +37,6 @@ class Account {
 
     protected void encodePassword(){
 
-        //PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        //String hashedPassword = PasswordEncoder.encode(accountPassword);
-
-       //accountPassword = springSecurityService.passwordEncoder ? springSecurityService.encodePassword(accountPassword):accountPassword
         accountPassword = springSecurityService?.passwordEncoder ?
                 springSecurityService.encodePassword(accountPassword): accountPassword
     }

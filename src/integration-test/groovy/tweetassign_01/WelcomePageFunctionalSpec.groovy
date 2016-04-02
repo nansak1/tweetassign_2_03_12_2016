@@ -2,6 +2,12 @@ package tweetassign_01
 
 import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
+import grails.converters.JSON
+import grails.transaction.Rollback
+import groovyx.net.http.HttpResponseException
+import groovyx.net.http.RESTClient
+import spock.lang.Shared
+import spock.lang.Specification
 
 
 /**

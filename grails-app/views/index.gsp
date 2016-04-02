@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="app">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -8,12 +8,29 @@
     <asset:stylesheet src="application.css"/>
 </head>
 
-<body ng-app="app">
-<h1>Welcome to the sample Grails 3 Angular App</h1>
 
-<div ng-controller="welcomeController">
-    <h2></h2>
-</div>
+<body ng-controller="headerController">
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">MSSE Angular Routing</a>
+        </div>
+
+        <div ng-view>
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-class="{ active: isActive('/home')}"><a href="#home">Home</a></li>
+            <li ng-class="{ active: isActive('/about')}"><a href="#about">About</a></li>
+            <li ng-class="{ active: isActive('/contact')}"><a href="#contact">Contact</a></li>
+        </ul>
+        </div>
+    </div>
+</nav>
+
+<div ui-view></div>
+
+<footer class="jumbotron text-center">
+    <p>Footer Content</p>
+</footer>
 
 </body>
 </html>

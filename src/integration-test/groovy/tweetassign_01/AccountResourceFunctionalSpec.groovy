@@ -56,7 +56,7 @@ class AccountResourceFunctionalSpec extends GebSpec{
     def 'using token to account endpoint allowed'(){
 
         when:
-        def response = restClient.get(path:"/accounts", headers: ['X-Auth-Token':token])
+        def response = restClient.get(path:"/api/accounts", headers: ['X-Auth-Token':token])
 
         then:
         response.status == 200

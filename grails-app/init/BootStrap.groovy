@@ -25,7 +25,7 @@ class BootStrap {
             new UserRole(user: admin, role: role).save(flush: true, failOnError: true)
 
 
-/*
+
         // account information
         def a1 = new Account(accountHandle: 'richelliot', fullName: 'Richard Elliot', emailAddress: 'richelliot@gmail.com', accountPassword: 'msse2016ASSIGN').save(failOnError: true)
         def a2 = new Account(accountHandle: 'donaldtrump', fullName: 'Donald Trump', emailAddress: 'dtrump@trumpmag.com', accountPassword: 'msse2016ASSIGN').save(failOnError: true)
@@ -61,7 +61,7 @@ class BootStrap {
         def m22 = new Message(msgText: "Yes most certainly", acc: a4).save(failOnError: true)
         def m23 = new Message(msgText: "How many do you have?", acc: a3).save(failOnError: true)
         def m24 = new Message(msgText: "Six for the one in our family room", acc: a4).save(failOnError: true)
-        def m25 = new Message(msgText: "Ok, see you!", acc: a1).save(failOnError: true)*/
+        def m25 = new Message(msgText: "Ok, see you!", acc: a1).save(failOnError: true)
 
     }
     def destroy = {
