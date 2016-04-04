@@ -57,7 +57,7 @@ app.controller('loginController', function ($scope, $location, $http, authServic
             })
 
 
-    }
+    };
 
 
     //$scope.username = {};
@@ -66,18 +66,19 @@ app.controller('loginController', function ($scope, $location, $http, authServic
 app.controller('searchController', function ($scope, msgService) {
     $scope.message = 'Search something';
     $scope.toggle = true;
-    //$scope.text;
+    //console.log ($scope.text);
 
    // $scope.auth.token = authService.getToken();
     //$scope.auth.username = authService.getUsername()
 
-   // $scope.getMessages = function(){
+    $scope.getMessages = function(){
 
         msgService.getMessages()
             .then(function(response){
                 $scope.messages = response.data;
+                console.log($scope.messages);
                 return response.data;
-            })
+            });
 
        /* $http.get('/messages')
             .success(function(response){
@@ -88,11 +89,12 @@ app.controller('searchController', function ($scope, msgService) {
             console.log("error:" + response.data);
             $scope.messages = response.data;
         });*/
-   // };
+    };
 
-    //$scope.searchMessages = function() {
+    $scope.searchMessages = function() {
 
-        var params = {text: $scope.text}
+        //var params = {"text": $scope.text};
+        console.log($scope.text);
 
       /*   $http.get('/messages/searchText?text='+ $scope.text)
          .success(function(response){
@@ -104,14 +106,17 @@ app.controller('searchController', function ($scope, msgService) {
          $scope.messages = response.data;
          });*/
 
-        msgService.searchMessages(params)
+
+        msgService.searchMessages($scope.text)
             .then(function(response){
+
                 $scope.messages = response.data;
+                console.log($scope.messages);
                 return response.data;
             })
 
 
-   // }
+   };
 
     //$scope.getMessage();
     //$scope.searchMessages();
