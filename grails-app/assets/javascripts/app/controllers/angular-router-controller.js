@@ -79,33 +79,12 @@ app.controller('searchController', function ($scope, msgService) {
                 console.log($scope.messages);
                 return response.data;
             });
-
-       /* $http.get('/messages')
-            .success(function(response){
-            console.log("success: " + response.data);
-            $scope.messages =  response.data;
-        })
-            .error(function(response){
-            console.log("error:" + response.data);
-            $scope.messages = response.data;
-        });*/
     };
 
     $scope.searchMessages = function() {
 
-        //var params = {"text": $scope.text};
+        //var params = {text: $scope.text};
         console.log($scope.text);
-
-      /*   $http.get('/messages/searchText?text='+ $scope.text)
-         .success(function(response){
-         console.log("success: " + response.data);
-         $scope.messages =  response.data;
-         })
-         .error(function(response){
-         console.log("error:" + response.data);
-         $scope.messages = response.data;
-         });*/
-
 
         msgService.searchMessages($scope.text)
             .then(function(response){
@@ -113,10 +92,16 @@ app.controller('searchController', function ($scope, msgService) {
                 $scope.messages = response.data;
                 console.log($scope.messages);
                 return response.data;
-            })
+            },
+            function(error) {
+                console.log('error', error);
+
+            });
+        };
+    //console.log($scope.searchResults)
 
 
-   };
+   //};
 
     //$scope.getMessage();
     //$scope.searchMessages();

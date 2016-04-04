@@ -8,25 +8,26 @@
     </div>
     </form>
 
-    <div ng-repeat="m in messages">
+    <!--<div ng-repeat="m in messages">
+        {{ m.accountHandle }}
         {{ m.msgText }}
-    </div>
+    </div>-->
 
     <!--<span><a href="#" ng-click="messagesShow = !messagesShow"  >Messages</a></span>-->
     <!--<span><a href="#" ng-click="getMessage()">Messages</a></span>-->
 
     <!--<div ng-show="messagesShow">-->
-    <!--    <table class="table table-hover">
+      <table class="table table-hover">
             <tr>
                 <th>User</th>
                 <th>Message</th>
 
             </tr>
             <tr ng-repeat="m in messages">
-                <td>{{m.id }}</td>
+                <td>{{m.accountHandle }}</td>
                 <td>{{m.msgText}}</td>
             </tr>
-            </table>-->
+            </table>
 
        <!-- </div>-->
 </div>
