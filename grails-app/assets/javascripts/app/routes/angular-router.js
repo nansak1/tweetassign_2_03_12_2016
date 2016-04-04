@@ -3,23 +3,28 @@
  */
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/home', {
-            templateUrl: '/app/home.htm',
-            controller: 'mainController'
+        .when('/login', {
+            templateUrl: '/app/login.htm',
+            controller: 'loginController'
         })
-        .when('/about', {
-            templateUrl: '/app/about.html',
-            controller: 'aboutController'
+        .when('/details', {
+            templateUrl: '/app/account.htm',
+            controller: 'accountController'
         })
-        .when('/contact', {
-            templateUrl: '/app/contact.html',
-            controller: 'contactController'
+        .when('/search', {
+            templateUrl: '/app/search.htm',
+            controller: 'searchController'
         })
+       /* .when('/search/text/:text', {
+            //templateUrl: '/app/search.htm',
+            controller: 'searchController'
+
+        })*/
         .when('/attendee/:action?/:id?', {
-            templateUrl: 'twtr/partials/attendee.html'
+            templateUrl: 'twtr/partials/attendee.htm'
         })
         .otherwise({
-            redirectTo: '/home'
+            redirectTo: '/login'
         });
 });
 

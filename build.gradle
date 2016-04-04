@@ -256,11 +256,17 @@ bower {
         source 'angular.js'
         source 'angular-csp.css'
         source 'angular-route.js'
+        source 'angular-resource.js'
     }
 
     'angular-route'('1.5.x') {
         source 'angular-route.js'
     }
+
+    'angular-resource'('1.5.x') {
+        source 'angular-resource.js'
+    }
+
 
 }
 

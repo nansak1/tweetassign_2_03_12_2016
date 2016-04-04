@@ -16,21 +16,21 @@
             <a class="navbar-brand" href="/">MSSE Angular Routing</a>
         </div>
 
-        <div ng-view>
+        <!--<div ng-view>-->
         <ul class="nav navbar-nav navbar-right">
-            <li ng-class="{ active: isActive('/home')}"><a href="#home">Home</a></li>
-            <li ng-class="{ active: isActive('/about')}"><a href="#about">About</a></li>
-            <li ng-class="{ active: isActive('/contact')}"><a href="#contact">Contact</a></li>
+            <li ng-class="{ active: isActive('/login')}"><a href="#login">Login</a></li>
+            <li ng-class="{ active: isActive('/search')}"><a href="#search">Search</a></li>
+            <li ng-class="{ active: isActive('/details')}"><a href="#details">Details</a></li>
         </ul>
-        </div>
-    </div>
+        <!--</div>-->
+   </div>
 </nav>
 
-<div ui-view></div>
+<div ng-view></div>
 
-<footer class="jumbotron text-center">
+<!--<footer class="jumbotron text-center">
     <p>Footer Content</p>
-</footer>
+</footer>-->
 
 </body>
 </html>

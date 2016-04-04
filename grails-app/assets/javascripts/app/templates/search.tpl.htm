@@ -1,0 +1,36 @@
+<div ng-controller="searchController">
+
+    <form>
+    <div class="form-group">
+        <label for="searchInput">Search</label>
+        <input id="searchInput" class="form-control" placeholder="searchTerm" type="text" name="text" ng-model="text"/>
+        <button ng-click="searchMessages()">Search</button>
+    </div>
+    </form>
+
+    <div ng-repeat="result in searchResults">
+        {{ result.message }}
+    </div>
+
+    <!--<span><a href="#" ng-click="messagesShow = !messagesShow"  >Messages</a></span>-->
+    <!--<span><a href="#" ng-click="getMessage()">Messages</a></span>-->
+
+    <!--<div ng-show="messagesShow">-->
+    <!--    <table class="table table-hover">
+            <tr>
+                <th>User</th>
+                <th>Message</th>
+
+            </tr>
+            <tr ng-repeat="m in messages">
+                <td>{{m.id }}</td>
+                <td>{{m.msgText}}</td>
+            </tr>
+            </table>-->
+
+       <!-- </div>-->
+</div>
+
+<div id="auth-token">
+    {{ auth.token }}
+</div>

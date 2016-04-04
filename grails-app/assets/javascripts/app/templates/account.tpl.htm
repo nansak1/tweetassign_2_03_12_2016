@@ -1,0 +1,19 @@
+<div ng-controller="accountController">
+
+        <table class="table table-hover">
+            <tr>
+                <th>Username</th>
+                <th>Handle</th>
+
+            </tr>
+            <tr ng-repeat="a in accounts">
+                <td>{{a.fullName }}</td>
+                <td>{{a.accountHandle}}</td>
+            </tr>
+        </table>
+
+<div id="auth-token">
+    {{ auth.token }}
+</div>
+
+</div>

@@ -10,13 +10,14 @@
 //= require ../bower/bootstrap/dist/css/bootstrap.js
 //= require ../bower/angular/angular.js
 //= require angular-route/angular-route
+//= require angular-route/angular-resource
 
 //= require_self
 //= require_tree app
 
 // Create the angular application called 'app'
 
-var app = angular.module('app', ["ngRoute"]);
+var app = angular.module('app', ["ngRoute"/*, "ngResource"*/]);
 /*angular.module('app').controller('mainController', function($scope)
 {
 
