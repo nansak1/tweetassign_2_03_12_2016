@@ -44,7 +44,7 @@ app.controller('loginController', function ($scope, $location, $http, authServic
                 authService.setUsername(response.username);
                 authService.setToken(response.access_token);
                 //redirect to user page
-                //location.path("/accounts")
+                $location.path("/accounts/"+response.username);
                 //$scope.auth.roles = data.roles;
             })
             .error(function (error) {
@@ -111,9 +111,10 @@ app.controller('searchController', function ($scope, msgService) {
 
 });
 
-app.controller('accountController', function($scope, accService){
+app.controller('accountController', function($scope, accService, authService){
 
-    accService.getAccounts()
+    var user = authService.getUsername();
+    accService.getAccounts(user)
         .then(function(response){
             $scope.accounts = response.data;
             return response.data;
