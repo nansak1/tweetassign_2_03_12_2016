@@ -2,7 +2,7 @@
  * Created by nansak1 on 4/2/2016.
  */
 
-app.service('authService', function () {
+app.service('loginService', function () {
 
     var token ={};
     var username = {};

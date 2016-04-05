@@ -7,7 +7,7 @@ app.service('accService', function($http){
 
 
     var getAccounts = function(user) {
-        return $http.get('/accounts/' + user);
+        return $http.get('/accounts/'+ user);
 
     }
 

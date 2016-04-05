@@ -24,102 +24,15 @@ app.controller('headerController', function ($scope, $location) {
    // };
 });*/
 
-app.controller('loginController', function ($scope, $location, $http, authService ) {
 
-    $scope.message = 'Login Page';
-    $scope.auth ={};
-    $scope.auth.token = authService.getToken();
-
-    $scope.Login = function(){
-
-        var authentication = new Object();
-        authentication.username = $scope.auth.username;
-        authentication.password = $scope.auth.password;
-
-        authService.setToken({});
-
-        $http.post('api/login', authentication)
-
-            .success(function (response) {
-                authService.setUsername(response.username);
-                authService.setToken(response.access_token);
-                //redirect to user page
-                $location.path("/accounts/"+response.username);
-                //$scope.auth.roles = data.roles;
-            })
-            .error(function (error) {
-                $scope.auth.authError = error;
-            })
-            .finally(function () {
-                $scope.auth.token = authService.getToken();
-                //redirect to user detail page of user in login
-                $location.path("/accounts");
-            })
-
-
-    };
 
 
     //$scope.username = {};
-});
-
-app.controller('searchController', function ($scope, msgService) {
-    $scope.message = 'Search something';
-    $scope.toggle = true;
-    //console.log ($scope.text);
-
-   // $scope.auth.token = authService.getToken();
-    //$scope.auth.username = authService.getUsername()
-
-    $scope.getMessages = function(){
-
-        msgService.getMessages()
-            .then(function(response){
-                $scope.messages = response.data;
-                console.log($scope.messages);
-                return response.data;
-            });
-    };
-
-    $scope.searchMessages = function() {
-
-        //var params = {text: $scope.text};
-        console.log($scope.text);
-
-        msgService.searchMessages($scope.text)
-            .then(function(response){
-
-                $scope.messages = response.data;
-                console.log($scope.messages);
-                return response.data;
-            },
-            function(error) {
-                console.log('error', error);
-
-            });
-        };
-    //console.log($scope.searchResults)
-
-
-   //};
-
-    //$scope.getMessage();
-    //$scope.searchMessages();
 
 
 
 
-});
 
-app.controller('accountController', function($scope, accService, authService){
-
-    var user = authService.getUsername();
-    accService.getAccounts(user)
-        .then(function(response){
-            $scope.accounts = response.data;
-            return response.data;
-        })
-});
 
 /*app.controller('attendeeController', function ($scope, $location, $routeParams, attendeeService) {
     $scope.attendee = {};

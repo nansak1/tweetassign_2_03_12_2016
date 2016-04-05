@@ -22,7 +22,7 @@ class LoginFunctionalTestSpec extends GebSpec{
   /*  def 'L1: When not logged in, route user to the login screen '(){
 
         when:
-        //account.username ="" and account.password=""
+        //account.username ="" && account.password=""
         //go() Not logged in
 
         then:
@@ -37,7 +37,7 @@ class LoginFunctionalTestSpec extends GebSpec{
         //go() api.login
 
         then:
-        //go() api/login
+        //go(/accounts)
         respone
 
     }
@@ -45,11 +45,11 @@ class LoginFunctionalTestSpec extends GebSpec{
     def 'L3: Invalid login will be rejected with an error message'(){
 
         when:
-        //go() api.login
+        //account.username && account.password rejected
 
         then:
-        //go() api/login
-        respone
+
+        //response.message = " Invalid credentials, please try again
 
     }*/
 

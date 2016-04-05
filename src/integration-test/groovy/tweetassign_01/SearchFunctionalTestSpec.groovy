@@ -19,37 +19,56 @@ class SearchFunctionalTestSpec {
     }
 
 
-    /*  def 'S1: When not logged in, route user to the login screen '(){
+    /*  def 'S1: Provide a search box for finding messages by message poster and message contents '(){
 
           when:
-          //account.username ="" and account.password=""
-          //go() Not logged in
+          //perform a search by message content
+          (searchInput).text() ="h"
 
           then:
-          //go(/api/login) api/login
+          //$("#resultScroll").text()
+
+          when:
+          //perform a search by username
+          (searchInput).text() ="richelliot"
+
+          then:
+          //$("#resultScroll").text()
 
       }
 
-      def 'L2: Login screen allows a user to enter username and password to gain access '(){
+      def 'S2: Display matching results in a scrollable area below the search box '(){
 
           when:
-          account.username !="" && account.password !=""
-          //go() api.login
+          search is successful
+          //go(/search) api.login
 
           then:
-          //go() api/login
-          respone
+
+          findElementbyId(#resultScroll) == true
 
       }
 
-      def 'L3: Invalid login will be rejected with an error message'(){
+      def 'S3: Search result messages will display the message contents as well as the posting user.'(){
 
           when:
-          //go() api.login
+          //go(/search) with some input text
 
           then:
           //go() api/login
-          respone
+          find element for account handle and message
 
-      }*/
+      }
+
+    def 'S4: Clicking on the posting user’s name in a message will route to the user’s detail page.'(){
+
+        when:
+        //go(/search) user's name in clicked on in search results
+        (#username).click
+
+        then:
+        //go(/accounts/username)
+        go to account detail page of user
+
+    }*/
 }
