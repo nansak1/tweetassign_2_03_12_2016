@@ -6,11 +6,11 @@ app.controller('searchController', function ($scope, msgService, authService) {
     $scope.toggle = true;
 
     var user = authService.getUsername();
-    var token = authService.getToken();
+    $scope.aToken = authService.getToken();
     // var user = $scope.accountHandle
 
     console.log(user);
-    console.log(token);
+    //console.log(token);
     //console.log ($scope.text);
 
     // $scope.auth.token = authService.getToken();
