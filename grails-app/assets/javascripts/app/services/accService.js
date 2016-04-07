@@ -6,16 +6,25 @@
 app.service('accService', function($http){
 
 
+    var getAllAccounts = function() {
+        return $http.get('/accounts');
+
+    };
+
     var getAccounts = function(user) {
         return $http.get('/accounts/'+ user);
 
-    }
+    };
 
 
     return {
         getAccounts : function (user) {
-            return $http.get('/accounts/'+user);
-        }
+            return $http.get('/accounts/'+user);},
+
+        getAllAccounts : getAllAccounts
+
+
+
     };
 
 });

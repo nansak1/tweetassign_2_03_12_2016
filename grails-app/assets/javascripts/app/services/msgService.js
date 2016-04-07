@@ -15,24 +15,25 @@ app.service('msgService', function($http){
        // if ($route.params) //determine if its by an account
         //{
         //var url = 'accounts/'+paramText+'/messages'
-           return $http.get('/accounts/'+paramText+'/messages'); //search by user
+         //  return $http.get('/accounts/'+paramText+'/messages'); //search by user
         //}
         //else {
-            //return  $http.get("/messages/searchText", {params: {text: paramText}});  //search by message content
+            return  $http.get("/messages/searchText", {params: {text: paramText}});  //search by message content
         //}
 
     };
 
-   /* var getMessagesbyPoster = function(paramText) {
+    var searchMessagesbyPoster = function(paramText) {
         return $http.get('accounts/'+paramText +'/messages');
 
-    }*/
+    }
 
 
     return {
         //getMessages : function () {return $http.get('/messages');},
         //searchMessages: function (paramText){return  $http.get("/messages/searchText", {params: {text: paramText}});}
-        searchMessages: searchMessages
+        searchMessages: searchMessages,
+        searchMessagesbyPoster : searchMessagesbyPoster
 
     };
 

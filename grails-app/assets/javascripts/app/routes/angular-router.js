@@ -5,7 +5,11 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/login', {
             templateUrl: '/app/login.htm',
-            controller: 'loginController'
+            controller: 'authController'
+        })
+        .when('/home', {
+            templateUrl: '/app/welcome.htm',
+            controller: 'mainController'
         })
         .when('/details', {
             templateUrl: '/app/account.htm',

@@ -1,12 +1,16 @@
-<form id="add-user-form">
+<!--<div ng-controller="authController">-->
+<h1 class="page-header">Login</h1>
+
+<form id="login-form">
+
     <div class="form-group">
         <label for="handleInput">Username</label>
-        <input id="handleInput" class="form-control" placeholder="handle" type="text" ng-model="auth.username"/>
+        <input id="handleInput" name="handle" class="form-control" placeholder="handle" type="text" ng-model="accountHandle"/>
     </div>
 
     <div class="form-group">
         <label for="passwordInput">Password</label>
-        <input id="passwordInput" class="form-control" placeholder="password" type="password", ng-model="auth.password"/>
+        <input id="passwordInput" name="password" class="form-control" placeholder="password" type="password", ng-model="accountPassword"/>
     </div>
 
     <div class="form-group">
@@ -14,9 +18,15 @@
         <button id="return" type="button" class="btn btn-warning btn-block" ng-click="Login()">Login</button>
     </div>
 
+        <div class="error">
+            <li>{{ error }}</li>
+        </div>
 
-<div id="auth-token">
-    {{ auth.token }}
-</div>
+    <div>
+        {{ aToken }}
+    </div>
+
 
 </form>
+
+   <!-- </div>-->
