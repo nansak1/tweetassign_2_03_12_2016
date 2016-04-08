@@ -28,7 +28,6 @@ app.controller('authController', ['$scope', 'authService', '$location', function
         };
 
         $scope.destroyToken = function(){
-
             $scope.loggedInUser = null;
             //console.log($scope.text);
             $location.path('/');
@@ -48,7 +47,20 @@ app.controller('authController', ['$scope', 'authService', '$location', function
 
         };
 
-    $scope.isLoggedIn = authService.isLoggedIn();
+    /*$scope.$watch($scope.isLoggedIn, function(user, token) {
+        if (!user && !token){
+            $location.path('/login');
+            $scope.isLoggedIn = null;
+            console.log( "No token:" + $scope.isLoggedIn)
+        }
+        else{
+            $location.path('/home')
+            $scope.isLoggedIn = user;
+            console.log( "token found:" + $scope.isLoggedIn)
+        }
+   });*/
+
+    //$scope.isLoggedIn = authService.isLoggedIn();
     //function to keep track of login or logout
 
  /*   $scope.$watch(authService.isLoggedIn, function (value, oldValue) {

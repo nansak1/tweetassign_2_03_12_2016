@@ -4,13 +4,21 @@
 
 app.service('msgService', function($http){
 
+    var someMsg;
+    var handle;
 
-   /* var getMessages = function() {
-        return $http.get('/messages');
+    var getMessages = function() {
 
-    };*/
+        //return $http.get('/messages');
+        return someMsg;
 
-    var searchMessages = function(paramText) {
+    };
+
+    var setMessages = function(msgResults){
+        someMsg = msgResults;
+    }
+
+    var searchMessages = function(searchText) {
 
        // if ($route.params) //determine if its by an account
         //{
@@ -18,13 +26,15 @@ app.service('msgService', function($http){
          //  return $http.get('/accounts/'+paramText+'/messages'); //search by user
         //}
         //else {
-            return  $http.get("/messages/searchText", {params: {text: paramText}});  //search by message content
+            return  $http.get("/messages/searchText", {params: {text: searchText}});  //search by message content
         //}
 
     };
 
-    var searchMessagesbyPoster = function(paramText) {
-        return $http.get('accounts/'+paramText +'/messages');
+    var searchMessagesbyPoster = function(accountHandle) {
+        //handle = accountHandle;
+
+        return $http.get('accounts/'+accountHandle +'/messages');
 
     }
 
@@ -32,6 +42,8 @@ app.service('msgService', function($http){
     return {
         //getMessages : function () {return $http.get('/messages');},
         //searchMessages: function (paramText){return  $http.get("/messages/searchText", {params: {text: paramText}});}
+        getMessages:getMessages,
+        setMessages:setMessages,
         searchMessages: searchMessages,
         searchMessagesbyPoster : searchMessagesbyPoster
 

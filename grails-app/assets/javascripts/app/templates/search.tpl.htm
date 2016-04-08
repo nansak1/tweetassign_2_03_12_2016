@@ -1,4 +1,4 @@
-<div ng-controller="searchController">
+<!--<div ng-controller="searchController">-->
 
     <form>
     <div class="form-group">
@@ -17,21 +17,22 @@
     <!--<span><a href="#" ng-click="getMessage()">Messages</a></span>-->
 
     <!--<div ng-show="messagesShow">-->
-    <div style='overflow:auto; width:400px;height:400px;'>
-      <table class="table table-hover">
+    <div style="overflow:auto; width:400px;height:400px;">
+     <table class="table table-hover">
             <tr>
                 <th>User</th>
                 <th>Message</th>
 
             </tr>
-            <tr ng-repeat="m in messages">
-                <td><a href="/#/details">{{m.accountHandle }}</a></td>
+            <tr ng-repeat="m in messages" >
+                <!--<td  name="handle" ng-model="handle" ng-click="getMessages(m.accountHandle)"><a href="#/details/{{m.accountHandle}}">{{m.accountHandle}}</a></td>-->
+                <td  name="handle" ng-model="handle" ng-click="getMessages(m.accountHandle)"><a href="#/details">{{m.accountHandle}}</a></td>
                 <td>{{m.msgText}}</td>
             </tr>
-            </table>
+     </table>
 
-        </div>
-</div>
+    </div>
+<!--</div>-->
 
 <div >
     {{ aToken }}

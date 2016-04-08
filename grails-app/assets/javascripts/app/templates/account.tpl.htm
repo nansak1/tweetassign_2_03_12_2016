@@ -1,19 +1,40 @@
-<div ng-controller="accountController">
+<!--<div ng-controller="accountController">-->
+
+<div style="overflow:auto; width:400px;height:400px;">
+    <table class="table table-hover">
+        <tr>
+           <!-- <th>User</th>-->
+            <th>Message</th>
+        </tr>
+        <tr  ng-repeat="m in messages" >
+            <td>{{m.msgText}}</td>
+        </tr>
+    </table>
+</div>
 
         <table class="table table-hover">
             <tr>
                 <th>Username</th>
-                <th>Handle</th>
+                <th>Email</th>
 
             </tr>
             <tr ng-repeat="a in accounts">
-                <td>{{a.fullName }}</td>
+                <td ng-model="handle">{{a.fullName }}</td>
                 <td>{{a.emailAddress}}</td>
             </tr>
         </table>
 
-<div>
-    {{ aToken }}
-</div>
+    <div>
+        {{ aToken }}
+    </div>
 
-</div>
+    <!--<div ng-controller="searchController">-->
+
+
+    <!--</div>-->
+
+<!--</div>-->
+
+
+
+

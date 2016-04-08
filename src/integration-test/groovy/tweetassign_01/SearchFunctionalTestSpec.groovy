@@ -19,56 +19,106 @@ class SearchFunctionalTestSpec {
     }
 
 
-    /*  def 'S1: Provide a search box for finding messages by message poster and message contents '(){
+      def 'S1: Provide a search box for finding messages by message poster and message contents '(){
+
+          when:
+          go '/login'
+          then:
+          $(".page-header").text() == "Login"
+
+          when:
+          $("#login-form input[name=username]").value("richelliot")
+          $("#login-form input[name=password]").value("msse2016ASSIGN")
+          $("#login-form input[type=submit]").click()
 
           when:
           //perform a search by message content
-          (searchInput).text() ="h"
+          $("#searchInput").text("Atl")
 
           then:
           //$("#resultScroll").text()
+          $("#searchInput").value() == "richelliot"
+          $("#searchInput").value() == "some message about atlanta"
 
-          when:
-          //perform a search by username
-          (searchInput).text() ="richelliot"
-
-          then:
-          //$("#resultScroll").text()
 
       }
 
-      def 'S2: Display matching results in a scrollable area below the search box '(){
+     def 'S2: Display matching results in a scrollable area below the search box '(){
 
-          when:
-          search is successful
-          //go(/search) api.login
+         when:
+         go '/login'
+         then:
+         $(".page-header").text() == "Login"
 
-          then:
+         when:
+         $("#login-form input[name=username]").value("richelliot")
+         $("#login-form input[name=password]").value("msse2016ASSIGN")
+         $("#login-form input[type=submit]").click()
 
-          findElementbyId(#resultScroll) == true
+         when:
+         //perform a search by account
+         $("#searchInput").text("")
+
+         then:
+         findElementbyId("#resultScroll") == true
+         $("#searchInput").value() == "richelliot"
+         $("#searchInput").value() == "some message about atlanta"
+
+
+
 
       }
 
       def 'S3: Search result messages will display the message contents as well as the posting user.'(){
 
           when:
-          //go(/search) with some input text
+          go '/login'
+          then:
+          $(".page-header").text() == "Login"
+
+          when:
+          $("#login-form input[name=username]").value("richelliot")
+          $("#login-form input[name=password]").value("msse2016ASSIGN")
+          $("#login-form input[type=submit]").click()
+
+          when:
+          //perform a search by account
+          $("#searchInput").text("")
 
           then:
-          //go() api/login
-          find element for account handle and message
+
+          $("#accountHandle").value() == "richelliot"
+          $("#mgText").value() == "some message about atlanta"
 
       }
 
     def 'S4: Clicking on the posting user’s name in a message will route to the user’s detail page.'(){
 
         when:
-        //go(/search) user's name in clicked on in search results
-        (#username).click
+        go '/login'
+        then:
+        $(".page-header").text() == "Login"
+
+        when:
+        $("#login-form input[name=username]").value("richelliot")
+        $("#login-form input[name=password]").value("msse2016ASSIGN")
+        $("#login-form input[type=submit]").click()
+
+        when:
+        //perform a search by account
+        $("#searchInput").text("")
 
         then:
-        //go(/accounts/username)
-        go to account detail page of user
 
-    }*/
+        $("#accountHandle").value() == "richelliot"
+        $("#mgText").value() == "some message about atlanta"
+
+        when:
+        //go(/search) user's name in clicked on in search results
+        ("#accountHandle").click()
+
+        then:
+        go'/details'
+
+    }
 }

@@ -1,9 +1,13 @@
 package tweetassign_01
 
 import geb.spock.GebSpec
+import grails.test.mixin.integration.Integration
 import groovyx.net.http.RESTClient
+import spock.lang.Ignore
+
 //import spock.lang.Shared
 
+@Integration
 /**
  * Created by nansak1 on 4/1/2016.
  */
@@ -27,7 +31,7 @@ class LoginFunctionalTestSpec extends GebSpec{
 
     def 'L2: Login screen allows a user to enter username and password to gain access '(){
         when:
-        go '/api/login'
+        go '/login'
         then:
         $(".page-header").text() == "Login"
         when:
@@ -40,7 +44,7 @@ class LoginFunctionalTestSpec extends GebSpec{
 
     def 'L3: Invalid login will be rejected with an error message'(){
         when:
-        go '/api/login'
+        go '/login'
         then:
         $(".page-header").text() == "Login"
         when:

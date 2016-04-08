@@ -6,6 +6,7 @@ import grails.converters.JSON
 import grails.transaction.Rollback
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
+import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -13,6 +14,7 @@ import spock.lang.Specification
 /**
  * Created by nansak1 on 3/28/2016.
  */
+@Ignore
 @Integration
 class WelcomePageFunctionalSpec extends GebSpec{
 

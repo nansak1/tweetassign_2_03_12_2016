@@ -19,6 +19,10 @@ app.config(function ($routeProvider) {
             templateUrl: '/app/search.htm',
             controller: 'searchController'
         })
+       /* .when('/search:text', {
+            templateUrl: '/app/search.htm',
+            controller: 'searchController'
+        })*/
         .when('/attendee/:action?/:id?', {
             templateUrl: 'twtr/partials/attendee.htm'
         })

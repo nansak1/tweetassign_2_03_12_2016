@@ -5,26 +5,29 @@
 
 app.service('accService', function($http){
 
-
-    var getAllAccounts = function() {
+    var handle;
+   /* var getAllAccounts = function() {
         return $http.get('/accounts');
+    };*/
 
+    var setAccount = function(accountHandle){
+        handle = accountHandle;
+        return handle;
+    }
+
+    var getAccount = function() {
+        return handle;
     };
 
-    var getAccounts = function(user) {
+    var findAccount = function(user) {
         return $http.get('/accounts/'+ user);
-
     };
-
 
     return {
-        getAccounts : function (user) {
-            return $http.get('/accounts/'+user);},
-
-        getAllAccounts : getAllAccounts
-
-
-
+        findAccount : findAccount,
+        getAccount:getAccount,
+        setAccount: setAccount
+        //getAllAccounts : getAllAccounts
     };
 
 });

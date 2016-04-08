@@ -1,12 +1,40 @@
 /**
  * Created by nayna on 4/5/2016.
  */
-app.controller('searchController', function ($scope, msgService, authService) {
-    $scope.message = 'Search something';
-    $scope.toggle = true;
+app.controller('searchController', function ($scope, msgService, authService, accService, $location) {
+    //$scope.message = 'Search something';
+    //$scope.toggle = true;
+
 
     var user = authService.getUsername();
-    $scope.aToken = authService.getToken();
+    var token = authService.getToken();
+    $scope.aToken = token;
+    $scope.isLoggedIn
+
+   // $scope.$watch($scope.isLoggedIn, function(isLoggedIn, aToken) {
+     /*   if (!token){
+            $location.path('/login');
+            $scope.isLoggedIn = null;
+            console.log( "No token:" + $scope.isLoggedIn)
+        }
+        else{
+            $location.path('/search');
+            $scope.isLoggedIn = user;
+            console.log( "token found:" + $scope.isLoggedIn)
+        }*/
+   /* if (!user && !token){
+        $location.path('/login');
+        $scope.isLoggedIn = null;
+        console.log( "No token:" + $scope.isLoggedIn)
+    }
+    else{
+        $location.path('/search');
+        $scope.isLoggedIn = user;
+        console.log( "token found:" + $scope.isLoggedIn)
+    }*/
+   // });
+    //authService.isLoggedIn(user);
+
     // var user = $scope.accountHandle
 
     console.log(user);
@@ -16,44 +44,71 @@ app.controller('searchController', function ($scope, msgService, authService) {
     // $scope.auth.token = authService.getToken();
     //$scope.auth.username = authService.getUsername()
 
-    $scope.getMessages = function(){
+    $scope.getMessages = function(params){
 
-        msgService.getMessages()
+        accService.setAccount(params);
+
+        msgService.searchMessagesbyPoster(params)
             .then(function(response){
+                    msgService.setMessages(response.data);
                 $scope.messages = response.data;
+                //msgService.setMessages($scope.messages);
                 console.log($scope.messages);
                 return response.data;
-            });
+            },
+                function(error) {
+                    console.log('error', error);
+                });
     };
 
     $scope.searchMessages = function() {
-
         //var params = {text: $scope.text};
         console.log($scope.text);
 
-        msgService.searchMessages($scope.text)
-            .then(function(response){
+        //var userExists = accService.getAccount($scope.text);
+       // console.log(userExists);
 
-                    $scope.messages = response.data;
-                    console.log($scope.messages);
+       /* accService.getAccount($scope.text)
+            .then(function(response){
+                    $scope.account = response.data;
                     return response.data;
                 },
-                function(error) {
+                function (error) {
                     console.log('error', error);
-
                 });
 
-        msgService.searchMessagesbyPoster($scope.text)
-            .then(function(response){
+        console.log($scope.account);
 
-                    $scope.messages = response.data;
-                    console.log($scope.messages);
-                    return response.data;
-                },
-                function(error) {
-                    console.log('error', error);
 
-                });
+
+        if (!$scope.account) { */ //is a username
+            msgService.searchMessages($scope.text)
+                .then(function (response) {
+                        $scope.messages = response.data;
+                        console.log($scope.messages);
+                        return response.data;
+                    },
+                    function (error) {
+                        console.log('error', error);
+                    });
+     /*  }
+        else {
+
+            msgService.searchMessagesbyPoster($scope.text)
+                .then(function (response) {
+                        $scope.messages = response.data;
+                        console.log($scope.messages);
+                        return response.data;
+                    },
+                    function (error) {
+                        console.log('error', error);
+
+                    });
+
+
+        }*/
+
+
     };
     //console.log($scope.searchResults)
 

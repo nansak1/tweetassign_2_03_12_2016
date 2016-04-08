@@ -7,7 +7,7 @@ import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import spock.lang.*
 
-@Ignore
+
 @Integration
 @Stepwise
 
@@ -60,7 +60,7 @@ class AccountResourceFunctionalSpec extends GebSpec{
 
         then:
         response.status == 200
-        response.data.size() == 0
+        response.data.size() == 9
 
 
     }
