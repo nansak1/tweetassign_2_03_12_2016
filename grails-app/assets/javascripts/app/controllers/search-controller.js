@@ -44,6 +44,8 @@ app.controller('searchController', function ($scope, msgService, authService, ac
     // $scope.auth.token = authService.getToken();
     //$scope.auth.username = authService.getUsername()
 
+
+    //to route to account poster's detail page
     $scope.getMessages = function(params){
 
         accService.setAccount(params);
@@ -61,6 +63,8 @@ app.controller('searchController', function ($scope, msgService, authService, ac
                 });
     };
 
+
+    // search by poster and text?
     $scope.searchMessages = function() {
         //var params = {text: $scope.text};
         console.log($scope.text);

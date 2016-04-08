@@ -4,8 +4,8 @@
 
 
 app.service('authService', function($http){
-    var username;
-    var authToken;
+    var username ={};
+    var authToken ={};
 
     var Login = function (accountHandle, accountPassword) {
         return $http.post('/api/login', {username: accountHandle, password: accountPassword })

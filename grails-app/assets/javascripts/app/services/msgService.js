@@ -4,19 +4,17 @@
 
 app.service('msgService', function($http){
 
-    var someMsg;
-    var handle;
+    var someMsg ={};
+    var handle = {};
 
     var getMessages = function() {
-
         //return $http.get('/messages');
         return someMsg;
-
     };
 
     var setMessages = function(msgResults){
         someMsg = msgResults;
-    }
+    };
 
     var searchMessages = function(searchText) {
 
@@ -33,10 +31,9 @@ app.service('msgService', function($http){
 
     var searchMessagesbyPoster = function(accountHandle) {
         //handle = accountHandle;
-
         return $http.get('accounts/'+accountHandle +'/messages');
 
-    }
+    };
 
 
     return {

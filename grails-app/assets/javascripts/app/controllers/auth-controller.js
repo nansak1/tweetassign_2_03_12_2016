@@ -29,6 +29,7 @@ app.controller('authController', ['$scope', 'authService', '$location', function
 
         $scope.destroyToken = function(){
             $scope.loggedInUser = null;
+            alert("Sorry to see you go...");
             //console.log($scope.text);
             $location.path('/');
             authService.destroyToken();

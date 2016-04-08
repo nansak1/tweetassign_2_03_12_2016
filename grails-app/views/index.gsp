@@ -13,13 +13,13 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">MSSE Angular Routing</a>
+            <a class="navbar-brand" href="/">twtr</a>
            <!-- <li ng-class="{ active: isActive('/login')}" ng-click="destroyToken()"><a href="#">Logout</a></li>-->
-        <!--<h1>Welcome {{isLoggedIn}}</h1>-->
-        <!--<div ng-view>-->
-        <ul class="nav navbar-nav navbar-right" ng-model="isLoggedIn"> <!--ng-show="isLoggedIn"--> <!-- Show if user is logged in-->
-            <li ng-class="{ active: isActive('/login')}" ng-click="destroyToken()"><a href="#logout">Logout</a></li>
-            <li ng-class="{ active: isActive('/search')}"><a href="#/search">Search</a></li>
+
+           <!--ng-show="isLoggedIn"--> <!-- TO DO: Show if user is logged in-->
+            <ul class="nav navbar-nav navbar-right" ng-model="isLoggedIn">
+                <li ng-class="{ active: isActive('/login')}" ng-click="destroyToken()"><a href="#logout">Logout</a></li>
+                <li ng-class="{ active: isActive('/search')}"><a href="#/search">Search</a></li>
             <!--<form ng-controller="searchController">
                 <div class="form-group">
                     <li ng-class="{ active: isActive('/search')}"><a href="#/search"><label for="searchInput">Search</label></a></li>
@@ -27,8 +27,8 @@
                     <button ng-click="searchMessages()">Search</button>
                 </div></form>-->
 
-            <li ng-class="{ active: isActive('/details')}"><a href="#/details">Details</a></li>
-        </ul>
+                <li ng-class="{ active: isActive('/details')}"><a href="#/details">Details</a></li>
+            </ul>
         </div>
         <!--</div>-->
 </div>
