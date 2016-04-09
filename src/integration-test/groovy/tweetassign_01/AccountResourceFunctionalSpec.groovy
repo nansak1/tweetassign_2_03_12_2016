@@ -7,7 +7,7 @@ import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import spock.lang.*
 
-
+@Ignore
 @Integration
 @Stepwise
 

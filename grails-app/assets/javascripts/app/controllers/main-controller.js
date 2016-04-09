@@ -7,7 +7,7 @@ app.controller('mainController', function($scope, authService, $location){
     var token = authService.getToken();
     $scope.aToken = token;
 
-    $scope.isLoggedIn;
+    $scope.isLoggedIn = user;
     console.log( "main 1:" + $scope.isLoggedIn);
 
    /* if (!user && !token){

@@ -5,7 +5,7 @@
 app.service('msgService', function($http){
 
     var someMsg ={};
-    var handle = {};
+    //var handle = {};
 
     var getMessages = function() {
         //return $http.get('/messages');

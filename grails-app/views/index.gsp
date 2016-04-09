@@ -3,13 +3,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
     <asset:javascript src="application.js"/>
     <asset:stylesheet src="application.css"/>
 </head>
 
 
-<body ng-controller="authController">
+<body> <!--ng-controller="authController">-->
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
@@ -17,7 +16,7 @@
            <!-- <li ng-class="{ active: isActive('/login')}" ng-click="destroyToken()"><a href="#">Logout</a></li>-->
 
            <!--ng-show="isLoggedIn"--> <!-- TO DO: Show if user is logged in-->
-            <ul class="nav navbar-nav navbar-right" ng-model="isLoggedIn">
+            <ul class="nav navbar-nav navbar-right">
                 <li ng-class="{ active: isActive('/login')}" ng-click="destroyToken()"><a href="#logout">Logout</a></li>
                 <li ng-class="{ active: isActive('/search')}"><a href="#/search">Search</a></li>
             <!--<form ng-controller="searchController">
@@ -39,6 +38,10 @@
 <!--<footer class="jumbotron text-center">
     <p>Footer Content</p>
 </footer>-->
+
+<div ng-model="aToken">
+    {{ aToken }}
+</div>
 
 </body>
 </html>

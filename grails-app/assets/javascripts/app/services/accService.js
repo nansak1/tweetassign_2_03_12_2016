@@ -6,6 +6,7 @@
 app.service('accService', function($http){
 
     var handle ={};
+
    /* var getAllAccounts = function() {
         return $http.get('/accounts');
     };*/

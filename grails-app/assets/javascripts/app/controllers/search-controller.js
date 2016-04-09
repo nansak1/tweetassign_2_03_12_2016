@@ -2,14 +2,14 @@
  * Created by nayna on 4/5/2016.
  */
 app.controller('searchController', function ($scope, msgService, authService, accService, $location) {
-    //$scope.message = 'Search something';
-    //$scope.toggle = true;
+    $scope.message = 'Search something';
+    $scope.toggle = true;
 
 
     var user = authService.getUsername();
     var token = authService.getToken();
     $scope.aToken = token;
-    $scope.isLoggedIn
+    $scope.isLoggedIn = user;
 
    // $scope.$watch($scope.isLoggedIn, function(isLoggedIn, aToken) {
      /*   if (!token){
@@ -52,7 +52,8 @@ app.controller('searchController', function ($scope, msgService, authService, ac
 
         msgService.searchMessagesbyPoster(params)
             .then(function(response){
-                    msgService.setMessages(response.data);
+
+                msgService.setMessages(response.data);
                 $scope.messages = response.data;
                 //msgService.setMessages($scope.messages);
                 console.log($scope.messages);

@@ -1,5 +1,8 @@
 <!--<div ng-controller="searchController">-->
 
+<p>{{ message }}</p>
+<p>{{ toggle }}</p>
+
     <form>
     <div class="form-group">
         <label for="searchInput">Search</label>
@@ -25,8 +28,8 @@
 
             </tr>
             <tr ng-repeat="m in messages" >
-                <!--<td  name="handle" ng-model="handle" ng-click="getMessages(m.accountHandle)"><a href="#/details/{{m.accountHandle}}">{{m.accountHandle}}</a></td>-->
-                <td> <!--name="handle" ng-model="handle" ng-click="getMessages(m.accountHandle)">--><a href="#/details" ng-click="searchMessagesbyPoster(m.accountHandle)">{{m.accountHandle}}</a></td>
+                <td  name="handle" ng-model="m.accountHandle"><a href="#/details/{{m.accountHandle}}">{{m.accountHandle}}</a></td>
+                <!--<td><a ng-model="m.accountHandle" href="#/details" ng-click="searchMessagesbyPoster(m.accountHandle)">{{m.accountHandle}}</a></td>-->
                 <td>{{m.msgText}}</td>
             </tr>
      </table>
@@ -34,6 +37,6 @@
     </div>
 <!--</div>-->
 
-<div >
+<div>
     {{ aToken }}
 </div>

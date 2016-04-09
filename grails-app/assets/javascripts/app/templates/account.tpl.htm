@@ -4,14 +4,15 @@
     <tr>
         <th>Username</th>
         <th>Email</th>
-
     </tr>
     <!--<tr ng-repeat="a in accounts">-->
     <tr>
         <td>{{accounts.fullName }}</td>
         <td>{{accounts.emailAddress}}</td>
+        <td><a type="button" class="btn btn-warning btn-center" href="#details/edit/{{attendee.fullName}}">Edit</a></td>
     </tr>
 </table>
+
 
 <div style="overflow:auto;">
     <table class="table table-hover">
@@ -28,6 +29,7 @@
 
 
     <div>
+        {{isLoggedIn}}
         {{ aToken }}
     </div>
 

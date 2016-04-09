@@ -1,8 +1,10 @@
 package tweetassign_01
 
 import groovyx.net.http.RESTClient
+import spock.lang.Ignore
 import spock.lang.Shared
 
+@Ignore
 /**
  * Created by nayna on 4/4/2016.
  */

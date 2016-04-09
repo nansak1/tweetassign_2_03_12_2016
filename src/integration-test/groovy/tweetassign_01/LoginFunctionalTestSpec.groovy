@@ -29,31 +29,33 @@ class LoginFunctionalTestSpec extends GebSpec{
         $(".page-header").text() == "Login"
     }
 
-    def 'L2: Login screen allows a user to enter username and password to gain access '(){
+   def 'L2: Login screen allows a user to enter username and password to gain access '(){
         when:
-        go '/login'
+        go '/'
         then:
         $(".page-header").text() == "Login"
         when:
-        $("#login-form input[name=username]").value("richelliot")
+        $("#login-form input[name=handle]").value("richelliot")
         $("#login-form input[name=password]").value("msse2016ASSIGN")
-        $("#login-form input[type=submit]").click()
+        $("#login-form input[type=button]").submit()
+        go'/#home'
         then:
+       // go'/#home'
         $(".page-header").text() == "Greetings!!"
     }
 
-    def 'L3: Invalid login will be rejected with an error message'(){
+   def 'L3: Invalid login will be rejected with an error message'(){
         when:
-        go '/login'
+        go '/'
         then:
         $(".page-header").text() == "Login"
         when:
-        $("#login-form input[name=username]").value("blue")
+        $("#login-form input[name=handle]").value("blue")
         $("#login-form input[name=password]").value("msse2016ASSIGN")
-        $("#login-form input[type=submit]").click()
+        $("#login-form input[type=button]").submit()
         then:
         $(".page-header").text() == "Login"
-        $(".errors li").size() == 1
-        $(".errors li")[0].text() == "Wrong credentials"
+        //$(".errors li").size() == 1
+        $('p').text() == "Wrong credentials"
     }
 }

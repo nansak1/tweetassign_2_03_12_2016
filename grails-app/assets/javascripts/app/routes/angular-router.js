@@ -15,6 +15,10 @@ app.config(function ($routeProvider) {
             templateUrl: '/app/account.htm',
             controller: 'accountController'
         })
+        .when('/details/:handle?', {
+            templateUrl: '/app/account.htm',
+            controller: 'accountController'
+        })
         .when('/search', {
             templateUrl: '/app/search.htm',
             controller: 'searchController'

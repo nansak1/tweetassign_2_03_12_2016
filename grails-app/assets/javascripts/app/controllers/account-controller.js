@@ -1,19 +1,21 @@
 /**
  * Created by nayna on 4/5/2016.
  */
-app.controller('accountController', function($scope, accService, authService, msgService, $location){
+app.controller('accountController', function($scope, accService, authService, msgService, $location, $routeParams){
 
     var user = authService.getUsername();
     var token = authService.getToken();
 
-    console.log("in acc controller " + user);
-    $scope.aToken = token;
-    $scope.isLoggedIn;
-    $scope.accounts = accService.getAccount();
+   // var poster = accService.getAccount($routeParams);
 
-  //get handle of account from search message list
-    console.log(user);
-    console.log(token);
+    console.log("in acc controller " + user);
+
+
+    $scope.aToken = token;
+    $scope.isLoggedIn = user;
+    console.log("Logged in user: " + user);
+    console.log("Posting in user: " + $routeParams);
+
 
 
 //auth stuff
@@ -26,7 +28,7 @@ app.controller('accountController', function($scope, accService, authService, ms
         $scope.isLoggedIn = user;
     }
 
-//logic to determine logged in user or not
+//logic to determine logged in user or posting user
 
 
 

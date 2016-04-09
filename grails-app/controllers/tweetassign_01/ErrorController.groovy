@@ -7,7 +7,7 @@ class ErrorController {
    /* def index() {}*/
 
     def internalServerError(){
-        reponse.status = 500
+        response.status = 500
         render ([error: response.status, mesage: "Internal server error"]) as JSON
         /*render(contentType:'application/json'){
             error = response.status
@@ -16,7 +16,7 @@ class ErrorController {
     }
 
     def notFound(){
-        reponse.status = 404
+        response.status = 404
         render ([error: response.status, message:"Not found"]) as JSON
         /*render(contentType:'application/json'){
             error = reponse.status
