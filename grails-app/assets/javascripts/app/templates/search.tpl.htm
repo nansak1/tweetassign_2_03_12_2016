@@ -27,8 +27,8 @@
                 <th>Message</th>
 
             </tr>
-            <tr ng-repeat="m in messages" >
-                <td  name="handle" ng-model="m.accountHandle"><a href="#/details/{{m.accountHandle}}">{{m.accountHandle}}</a></td>
+            <tr ng-repeat="m in messages">
+                <td><a href="#/details/{{m.accountHandle}}">{{m.accountHandle}}</a></td>
                 <!--<td><a ng-model="m.accountHandle" href="#/details" ng-click="searchMessagesbyPoster(m.accountHandle)">{{m.accountHandle}}</a></td>-->
                 <td>{{m.msgText}}</td>
             </tr>

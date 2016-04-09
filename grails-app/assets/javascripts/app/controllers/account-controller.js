@@ -9,24 +9,32 @@ app.controller('accountController', function($scope, accService, authService, ms
    // var poster = accService.getAccount($routeParams);
 
     console.log("in acc controller " + user);
+    console.log("in acc controller " + $routeParams.handle);
+
+    if (!$routeParams.handle){
+        user = user;
+    }
+    else {
+        user = $routeParams.handle;
+    }
 
 
     $scope.aToken = token;
     $scope.isLoggedIn = user;
     console.log("Logged in user: " + user);
-    console.log("Posting in user: " + $routeParams);
+    //console.log("Posting in user: " + $routeParams);
 
 
 
 //auth stuff
-    if (!token){
+  /*  if (!token){
         $location.path('/login');
         $scope.isLoggedIn = null
     }
     else{
         $location.path('/details');
         $scope.isLoggedIn = user;
-    }
+    }*/
 
 //logic to determine logged in user or posting user
 

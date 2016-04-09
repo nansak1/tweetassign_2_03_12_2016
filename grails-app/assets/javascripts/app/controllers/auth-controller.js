@@ -18,7 +18,7 @@ app.controller('authController', ['$scope', 'authService', '$location', function
                 $scope.loggedInUser = authService.getUsername();
 
                 console.log($scope.aToken);
-                $location.path('/home');
+                $location.path('/details');
             },
             function() {
                 $scope.error = "Wrong credentials";
