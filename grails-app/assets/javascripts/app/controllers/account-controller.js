@@ -3,49 +3,82 @@
  */
 app.controller('accountController', function($scope, accService, authService, msgService, $location, $routeParams){
 
-    var user = authService.getUsername();
+    var currentUser = authService.getUsername();
+    var currentUserInfo =  accService.getUserProfile();
     var token = authService.getToken();
+    var poster = $routeParams.handle;
 
-   // var poster = accService.getAccount($routeParams);
+    //is the user the current user or the poster
+    var anAccount = !poster ? currentUser : poster;
 
-    console.log("in acc controller " + user);
-    console.log("in acc controller " + $routeParams.handle);
 
-    if (!$routeParams.handle){
-        user = user;
-    }
-    else {
-        user = $routeParams.handle;
-    }
-
+    console.log("Logged in User in acc controller " + currentUser);
+    console.log("Poster in acc controller " + $routeParams.handle);
+    console.log("User id of logged in user in acc controller " + currentUserInfo.id);
+    console.log("following of logged in user in acc controller " + currentUserInfo.following);
+    //var currentUserFollowing = currentUserInfo.following;
+    //console.log(currentUserFollowing);
+    //console.log(currentUserFollowing.indexOf(poster))
+    //console.log($scope.Following);
 
     $scope.aToken = token;
-    $scope.isLoggedIn = user;
-    console.log("Logged in user: " + user);
+    $scope.isLoggedIn = currentUser;
+    $scope.poster = poster;
+    $scope.state = "Follow"
+    $scope.editorEnabled = false;
+
+    console.log("Logged in user: " + currentUser);
+
+    //if current user is already following poster follow button should say "following"
+    if (poster && poster!= currentUser){
+        var currentUserFollowing = currentUserInfo.following;
+        if (currentUserFollowing.indexOf(poster) == -1) {
+            $scope.state = "Follow";
+            console.log($scope.state);
+        }
+        else {
+            $scope.state = "Following";
+        }
+    }
+
+    //function ClickToEditCtrl($scope){
+        $scope.accounts;
+    //}
+
     //console.log("Posting in user: " + $routeParams);
 
-
-
 //auth stuff
-  /*  if (!token){
+    if (!token){
         $location.path('/login');
         $scope.isLoggedIn = null
     }
     else{
-        $location.path('/details');
-        $scope.isLoggedIn = user;
-    }*/
-
-//logic to determine logged in user or posting user
+        //$location.path('/');
+        $scope.isLoggedIn = currentUser;
+    }
 
 
 
+//to get followers
+    accService.accountsFollowing(currentUser)
+    //$scope.Following = function(poster, currentUserInfo){
+        .then(function(response)
+        {
+        var currentUserFollowing = response.data.following;
+            console.log(currentUserFollowing);
+            console.log(poster);
+        },function(error){
+
+            console.log('error', error);
+    });
+
+   // }
 
 //edit stuff
 
 
 //display messages by user
-    msgService.searchMessagesbyPoster(user)
+    msgService.searchMessagesbyPoster(anAccount)
         .then(function(response){
             $scope.messages = response.data;
             return response.data;
@@ -56,9 +89,10 @@ app.controller('accountController', function($scope, accService, authService, ms
 
 
     //display logged in user info
-    accService.findAccount(user)
+    accService.findAccount(anAccount)
         .then(function(response){
                 $scope.accounts = response.data;
+                // currentUserId = $scope.accounts.id;
                 return response.data;
             },
             function (error) {
@@ -67,8 +101,65 @@ app.controller('accountController', function($scope, accService, authService, ms
 
 
 
-    //follow stuff
 
+    $scope.Follow = function(posterId){
+        accService.followAccount(currentUserInfo.id, posterId)
+            .then(function(response){
+                    $scope.accounts = response.data;
+                    $scope.state ="Following";
+                    console.log("current user following poster");
+                    return response.data;
+                },
+                function (error) {
+                    console.log('error', error);
+                });
+
+
+    };
+
+    $scope.saveDetails = function(fullName, emailAddress)
+    {
+        /*$scope.editorEnabled = true;
+        console.log($scope.editorEnabled);
+        var updatedCredentials = {
+            fullName: $scope.accounts.fullName,
+            emailAddress: $scope.accounts.emailAddress,
+        };*/
+
+
+    };
+
+  /*  $('button.followButton').live('click', function(e){
+        e.preventDefault();
+        $button = $(this);
+        if($button.hasClass('following')){
+
+//$.ajax(); Do Unfollow
+
+            $button.removeClass('following');
+            $button.removeClass('unfollow');
+            $button.text('Follow');
+        } else {
+
+            // $.ajax(); Do Follow
+
+            $button.addClass('following');
+            $button.text('Following');
+        }
+    });
+
+    $('button.followButton').hover(function(){
+        $button = $(this);
+        if($button.hasClass('following')){
+            $button.addClass('unfollow');
+            $button.text('Unfollow');
+        }
+    }, function(){
+        if($button.hasClass('following')){
+            $button.removeClass('unfollow');
+            $button.text('Following');
+        }
+    });*/
 
     /*if (!user && !token){
         $location.path('/login');

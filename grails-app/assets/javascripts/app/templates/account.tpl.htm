@@ -1,16 +1,28 @@
 <!--<div ng-controller="accountController">-->
 
+
 <table class="table table-hover">
     <tr>
         <th>Username</th>
         <th>Email</th>
     </tr>
     <!--<tr ng-repeat="a in accounts">-->
-    <tr>
+    <tr ng-hide="editorEnabled">
+        <!--<td>{{accounts.id }}</td>-->
         <td>{{accounts.fullName }}</td>
         <td>{{accounts.emailAddress}}</td>
-        <td><a type="button" class="btn btn-warning btn-center" href="#details/edit/{{attendee.fullName}}">Edit</a></td>
+        <td><a type="button" ng-show="isLoggedIn" ng-hide="poster" class="btn btn-warning btn-center" ng-click="editorEnabled=!editorEnabled">Edit</a></td>
+        <td><a type="button" ng-show="poster" ng-model="Following" class="btn followButton" ng-click="Follow(accounts.id)">{{state}}</a></td>
     </tr>
+    <tr ng-show="editorEnabled">
+        <!--<input ng-model="accounts.id">{{accounts.id }}</input>-->
+        <td><input ng-model="accounts.fullName"/></td>
+        <td><input ng-model="accounts.emailAddress"/></td>
+        <!--<td><a type="button" ng-show="isLoggedIn" ng-hide="poster" class="btn btn-warning btn-center" ng-click="saveDetails(accounts.fullName, accounts.emailAddress)">Save</a></td>-->
+        <td><a type="button" ng-show="isLoggedIn" ng-hide="poster" class="btn btn-warning btn-center" ng-click="editorEnabled=!editorEnabled">Save</a></td>
+        <td><a type="button" ng-show="poster" ng-model="Following" class="btn followButton" ng-click="Follow(accounts.id)">{{state}}</a></td>
+    </tr>
+
 </table>
 
 

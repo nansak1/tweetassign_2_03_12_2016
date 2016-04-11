@@ -22,16 +22,16 @@ app.controller('searchController', function ($scope, msgService, authService, ac
             $scope.isLoggedIn = user;
             console.log( "token found:" + $scope.isLoggedIn)
         }*/
-   /* if (!user && !token){
+    if (!user && !token){
         $location.path('/login');
         $scope.isLoggedIn = null;
         console.log( "No token:" + $scope.isLoggedIn)
     }
     else{
-        $location.path('/search');
+        //$location.path('/');
         $scope.isLoggedIn = user;
         console.log( "token found:" + $scope.isLoggedIn)
-    }*/
+    }
    // });
     //authService.isLoggedIn(user);
 
@@ -52,7 +52,6 @@ app.controller('searchController', function ($scope, msgService, authService, ac
 
         msgService.searchMessagesbyPoster(params)
             .then(function(response){
-
                 msgService.setMessages(response.data);
                 $scope.messages = response.data;
                 //msgService.setMessages($scope.messages);

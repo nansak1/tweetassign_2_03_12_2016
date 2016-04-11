@@ -4,18 +4,22 @@
 
 
 //app.controller('authController', function ($scope, $location, $http, authService ) {
-app.controller('authController', ['$scope', 'authService', '$location', function ($scope, authService, $location) {
+app.controller('authController', ['$scope', 'authService', 'accService','$location', function ($scope, authService, accService, $location) {
 
+    $scope.isLoggedIn = null;
     //$scope.loggedInUser = null;
 
     $scope.Login = function () {
         authService.Login($scope.accountHandle, $scope.accountPassword)
             .then(function(response) {
-
                 authService.setCredentials(response.data.username);
+                accService.setUserProfile(response.data.username);
+
                 authService.setToken(response.data.access_token);
                 $scope.aToken = authService.getToken();
-                $scope.loggedInUser = authService.getUsername();
+                //$scope.loggedInUser = authService.getUsername();
+                $scope.isLoggedIn = authService.getUsername();
+
 
                 console.log($scope.aToken);
                 $location.path('/details');
@@ -39,13 +43,11 @@ app.controller('authController', ['$scope', 'authService', '$location', function
                         //$scope.messages = response.data;
                         console.log("User logged out and token destroyed");
                         return response.data;
-
                     },
                     function(error) {
                         console.log('error', error);
 
                     });*/
-
         };
 
     /*$scope.$watch($scope.isLoggedIn, function(user, token) {

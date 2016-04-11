@@ -14,6 +14,7 @@ app.service('authService', function($http){
         return (username)? username : false;
     };
 
+
     var getUsername = function(){
         return username
     };

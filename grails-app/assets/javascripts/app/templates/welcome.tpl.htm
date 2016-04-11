@@ -1,5 +1,5 @@
 <!--<div class ="greeting" ng-controller="mainController">-->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-show="isLoggedIn">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">twtr</a>
@@ -7,6 +7,7 @@
 
             <!--ng-show="isLoggedIn"--> <!-- TO DO: Show if user is logged in-->
             <ul class="nav navbar-nav navbar-right">
+                <li ng-show="isLoggedIn"> Logged in as {{isLoggedIn}}</li>
                 <li ng-class="{ active: isActive('/login')}" ng-click="destroyToken()"><a href="#logout">Logout</a></li>
                 <li ng-class="{ active: isActive('/search')}"><a href="#/search">Search</a></li>
                 <!--<form ng-controller="searchController">
@@ -43,4 +44,5 @@
 
 <div>
     {{ aToken }}
+    {{ isLoggedIn }}
 </div>
