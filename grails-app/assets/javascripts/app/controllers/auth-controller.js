@@ -63,14 +63,14 @@ app.controller('authController', ['$scope', 'authService', 'accService','$locati
         };
 
 
-    /*$scope.$watch($scope.isLoggedIn, function(user, token) {
-        if (!user && !token){
+ /*   $scope.$watch($scope.isLoggedIn, function(currentUser, token) {
+        if (!currentUser && !token){
             $location.path('/login');
             $scope.isLoggedIn = null;
             console.log( "No token:" + $scope.isLoggedIn)
         }
         else{
-            $location.path('/home')
+           // $location.path('/home')
             $scope.isLoggedIn = user;
             console.log( "token found:" + $scope.isLoggedIn)
         }

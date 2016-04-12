@@ -27,15 +27,15 @@ app.service('accService', function($http){
 
     var setUserProfile = function(currentUser, token){
 
+        console.log(currentUser);
+        console.log(token);
         $http.defaults.headers.post["Content-Type"] = "application/json";
         //$http.get("/accounts/"+ currentUser)
         return $http({
-            url: '/accounts/'+currentUser,
+            url: '/api/accounts/'+ currentUser,
             method: "GET",
-            headers: {
-                'X-Auth-Token': token
-            }
-        })
+            headers: {'X-Auth-Token': token.toString()}
+    } )
             .then(function(response){
                     currentUserProfile = response.data;
                 },
@@ -61,11 +61,9 @@ app.service('accService', function($http){
         //return $http.get('/accounts/'+ user);
 
         return $http({
-            url: '/accounts/'+user,
+            url: '/api/accounts/'+user,
             method: "GET",
-            headers: {
-                'X-Auth-Token': token
-            }
+            headers: {'X-Auth-Token': token.toString()}
         });
     };
 

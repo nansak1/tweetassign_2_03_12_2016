@@ -36,7 +36,13 @@ app.config(function ($routeProvider) {
 
 });
 
+//shows nav bar only when logged in
+app.run(function($rootScope, $location) {
+    $rootScope.location = $location;
 
+    //auth token
+    //$http.defaults.headers.common.['X-auth-token'] = token;
+});
     // Protect all routes other than login
    /* .run(function ($rootScope, $location, authService) {
         $rootScope.$on('$routeChangeStart', function (event, next) {

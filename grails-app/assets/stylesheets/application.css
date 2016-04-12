@@ -16,6 +16,12 @@
 *= encoding UTF-8
 */
 
+#searchResults
+{
+    overflow-y:auto;
+}
+
+
 body {
     background: #fafafa;
 }
