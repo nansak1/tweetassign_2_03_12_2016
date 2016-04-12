@@ -6,7 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.remote.DesiredCapabilities
 
 waiting {
-    timeout = 2
+    timeout = 10
 }
 
 driver = {

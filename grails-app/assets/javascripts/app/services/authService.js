@@ -4,8 +4,10 @@
 
 
 app.service('authService', function($http){
+
     var username ={};
     var authToken ={};
+    var currentUser;
 
     var Login = function (accountHandle, accountPassword) {
         return $http.post('/api/login', {username: accountHandle, password: accountPassword })
@@ -33,6 +35,10 @@ app.service('authService', function($http){
     var destroyToken = function(){
         authToken = null;
         username = null;
+
+        currentUser = undefined;
+        //$scope.isLoggedIn = undefined;
+        //delete $rootScope.currentUser;
         //return authToken;
         //return username;
     };

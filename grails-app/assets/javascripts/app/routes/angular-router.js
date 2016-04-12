@@ -23,15 +23,33 @@ app.config(function ($routeProvider) {
             templateUrl: '/app/search.htm',
             controller: 'searchController'
         })
-       /* .when('/search:text', {
-            templateUrl: '/app/search.htm',
-            controller: 'searchController'
-        })*/
+        /* .when('/search:text', {
+         templateUrl: '/app/search.htm',
+         controller: 'searchController'
+         })
         .when('/attendee/:action?/:id?', {
             templateUrl: 'twtr/partials/attendee.htm'
-        })
+        })*/
         .otherwise({
             redirectTo: '/login'
-        });
+        })
+
 });
+
+
+    // Protect all routes other than login
+   /* .run(function ($rootScope, $location, authService) {
+        $rootScope.$on('$routeChangeStart', function (event, next) {
+            if (next.$$route.originalPath != '/login') {
+                if (!authService.getUsername()) {
+                    $location.path('/login');
+                }
+            }
+        });
+});*/
+
+
+
+
+
 

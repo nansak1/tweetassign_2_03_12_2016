@@ -8,9 +8,34 @@ app.controller('accountController', function($scope, accService, authService, ms
     var token = authService.getToken();
     var poster = $routeParams.handle;
 
-    //is the user the current user or the poster
-    var anAccount = !poster ? currentUser : poster;
+    console.log("Logged in User in acc controller " + currentUser);
+    console.log("Poster in acc controller " + $routeParams.handle);
+    console.log("User id of logged in user in acc controller " + currentUserInfo.id);
+    console.log("following of logged in user in acc controller " + currentUserInfo.following);
 
+
+
+    //auth stuff
+    if (!token && !currentUser){
+        $location.path('/login');
+       // $scope.isLoggedIn = null
+        console.log("No token in acc:" + $scope.isLoggedIn);
+    }
+    else{
+
+        var anAccount = !poster ? currentUser : poster;
+        //$location.path('/');
+        $scope.isLoggedIn = currentUser;
+        console.log("token found in acc:" + $scope.isLoggedIn);
+    }
+
+    //is the user the current user or the poster
+
+    $scope.aToken = token;
+    $scope.isLoggedIn = currentUser;
+    $scope.poster = poster;
+    $scope.state = "Follow"
+    $scope.editorEnabled = false;
 
     console.log("Logged in User in acc controller " + currentUser);
     console.log("Poster in acc controller " + $routeParams.handle);
@@ -20,17 +45,10 @@ app.controller('accountController', function($scope, accService, authService, ms
     //console.log(currentUserFollowing);
     //console.log(currentUserFollowing.indexOf(poster))
     //console.log($scope.Following);
-
-    $scope.aToken = token;
-    $scope.isLoggedIn = currentUser;
-    $scope.poster = poster;
-    $scope.state = "Follow"
-    $scope.editorEnabled = false;
-
     console.log("Logged in user: " + currentUser);
 
     //if current user is already following poster follow button should say "following"
-    if (poster && poster!= currentUser){
+    if (poster && (poster!= currentUser)){
         var currentUserFollowing = currentUserInfo.following;
         if (currentUserFollowing.indexOf(poster) == -1) {
             $scope.state = "Follow";
@@ -42,20 +60,12 @@ app.controller('accountController', function($scope, accService, authService, ms
     }
 
     //function ClickToEditCtrl($scope){
-        $scope.accounts;
+        //$scope.accounts;
     //}
 
     //console.log("Posting in user: " + $routeParams);
 
-//auth stuff
-    if (!token){
-        $location.path('/login');
-        $scope.isLoggedIn = null
-    }
-    else{
-        //$location.path('/');
-        $scope.isLoggedIn = currentUser;
-    }
+
 
 
 
@@ -89,7 +99,7 @@ app.controller('accountController', function($scope, accService, authService, ms
 
 
     //display logged in user info
-    accService.findAccount(anAccount)
+    accService.findAccount(anAccount, token)
         .then(function(response){
                 $scope.accounts = response.data;
                 // currentUserId = $scope.accounts.id;

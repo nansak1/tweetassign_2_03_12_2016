@@ -32,30 +32,24 @@ class LoginFunctionalTestSpec extends GebSpec{
    def 'L2: Login screen allows a user to enter username and password to gain access '(){
         when:
         go '/'
-        then:
-        $(".page-header").text() == "Login"
-        when:
         $("#login-form input[name=handle]").value("richelliot")
         $("#login-form input[name=password]").value("msse2016ASSIGN")
-        $("#login-form input[type=button]").submit()
-        go'/#home'
+        $("#login").click()
+        sleep(2000)
         then:
-       // go'/#home'
         $(".page-header").text() == "Greetings!!"
     }
 
    def 'L3: Invalid login will be rejected with an error message'(){
         when:
         go '/'
-        then:
-        $(".page-header").text() == "Login"
-        when:
         $("#login-form input[name=handle]").value("blue")
         $("#login-form input[name=password]").value("msse2016ASSIGN")
-        $("#login-form input[type=button]").submit()
+        $("#login").click()
+
+        sleep(2000)
         then:
         $(".page-header").text() == "Login"
-        //$(".errors li").size() == 1
-        $('p').text() == "Wrong credentials"
+        $('p').text() == "Invalid Login"
     }
 }

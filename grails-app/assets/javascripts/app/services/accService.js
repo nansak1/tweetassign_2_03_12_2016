@@ -19,35 +19,54 @@ app.service('accService', function($http){
 
     var followAccount = function(currentUser, poster){
         return $http.put("/accounts/"+ poster +"/follow?follower="+currentUser);
-    }
+    };
 
     var accountsFollowing = function(currentUser){
         return $http.get("/accounts/"+ currentUser +"/followers");
-    }
+    };
 
-    var setUserProfile = function(currentUser){
-        $http.get("/accounts/"+ currentUser)
+    var setUserProfile = function(currentUser, token){
+
+        $http.defaults.headers.post["Content-Type"] = "application/json";
+        //$http.get("/accounts/"+ currentUser)
+        return $http({
+            url: '/accounts/'+currentUser,
+            method: "GET",
+            headers: {
+                'X-Auth-Token': token
+            }
+        })
             .then(function(response){
                     currentUserProfile = response.data;
                 },
                 function(error) {
                     console.log('error', error);
 
-                });
-    }
+                })
+
+    };
 
 
     var getUserProfile = function(){
         //console.log(currentUserProfile);
         return currentUserProfile;
-    }
+    };
 
     var getAccount = function() {
         return handle;
     };
 
-    var findAccount = function(user) {
-        return $http.get('/accounts/'+ user);
+    var findAccount = function(user, token) {
+        $http.defaults.headers.post["Content-Type"] = "application/json";
+        //return $http.get('/accounts/'+ user);
+
+        return $http({
+            url: '/accounts/'+user,
+            method: "GET",
+            headers: {
+                'X-Auth-Token': token
+            }
+        });
     };
 
     return {

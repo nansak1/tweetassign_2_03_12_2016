@@ -17,8 +17,8 @@
 
            <!--ng-show="isLoggedIn"--> <!-- TO DO: Show if user is logged in-->
             <ul class="nav navbar-nav navbar-right" >
-                <li ng-class="{ active: isActive('/login')}" ng-click="destroyToken()"><a href="#logout">Logout</a></li>
-                <li ng-show="isActive('/search')" ng-class="{active: isActive('/search')}"><a href="#/search">Search</a></li>
+                <li id="logout" ng-class="{ active: isActive('/login')}" ng-click="destroyToken()"><a href="#logout">Logout</a></li>
+                <li id="search" ng-class="{active: isActive('/search')}"><a href="#/search">Search</a></li>
 
             <!--<form ng-controller="searchController">
                 <div class="form-group">
@@ -27,7 +27,7 @@
                     <button ng-click="searchMessages()">Search</button>
                 </div></form>-->
 
-                <li ng-class="{ active: isActive('/details')}"><a href="#/details">Details</a></li>
+                <li id="details" ng-class="{ active: isActive('/details')}"><a href="#/details">Details</a></li>
             </ul>
         </div>
         <!--</div>-->

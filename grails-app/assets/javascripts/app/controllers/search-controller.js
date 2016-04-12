@@ -6,10 +6,10 @@ app.controller('searchController', function ($scope, msgService, authService, ac
     $scope.toggle = true;
 
 
-    var user = authService.getUsername();
+    var currentUser = authService.getUsername();
     var token = authService.getToken();
     $scope.aToken = token;
-    $scope.isLoggedIn = user;
+    $scope.isLoggedIn = currentUser;
 
    // $scope.$watch($scope.isLoggedIn, function(isLoggedIn, aToken) {
      /*   if (!token){
@@ -22,22 +22,23 @@ app.controller('searchController', function ($scope, msgService, authService, ac
             $scope.isLoggedIn = user;
             console.log( "token found:" + $scope.isLoggedIn)
         }*/
-    if (!user && !token){
+
+    if (!currentUser && !token){
         $location.path('/login');
-        $scope.isLoggedIn = null;
-        console.log( "No token:" + $scope.isLoggedIn)
+        $scope.isLoggedIn = undefined;
+        console.log( "No token in search:" + $scope.isLoggedIn)
     }
     else{
         //$location.path('/');
-        $scope.isLoggedIn = user;
-        console.log( "token found:" + $scope.isLoggedIn)
+        $scope.isLoggedIn = currentUser;
+        console.log( "token found in search:" + $scope.isLoggedIn)
     }
    // });
     //authService.isLoggedIn(user);
 
     // var user = $scope.accountHandle
 
-    console.log(user);
+    console.log(currentUser);
     //console.log(token);
     //console.log ($scope.text);
 

@@ -4,51 +4,64 @@
 
 
 //app.controller('authController', function ($scope, $location, $http, authService ) {
-app.controller('authController', ['$scope', 'authService', 'accService','$location', function ($scope, authService, accService, $location) {
+app.controller('authController', ['$scope', 'authService', 'accService','$location', '$rootScope',function ($scope, authService, accService, $location,$rootScope) {
 
+
+    var currentUser;
     $scope.isLoggedIn = null;
-    //$scope.loggedInUser = null;
+
 
     $scope.Login = function () {
         authService.Login($scope.accountHandle, $scope.accountPassword)
             .then(function(response) {
+
                 authService.setCredentials(response.data.username);
-                accService.setUserProfile(response.data.username);
-
                 authService.setToken(response.data.access_token);
+                accService.setUserProfile(response.data.username, response.data.access_token);
+
                 $scope.aToken = authService.getToken();
-                //$scope.loggedInUser = authService.getUsername();
                 $scope.isLoggedIn = authService.getUsername();
+                currentUser = authService.getUsername();
 
+               // $rootScope.$emit('userChange', currentUser);
 
-                console.log($scope.aToken);
-                $location.path('/details');
+                    $location.path('/details');
             },
-            function() {
-                $scope.error = "Wrong credentials";
+            function(error) {
+                //currentUser = undefined;
+               // delete $rootScope.currentUser;
+
+                $scope.error = "Invalid Login";
                 console.log($scope.error);
 
             });
         };
 
-        $scope.destroyToken = function(){
-            $scope.loggedInUser = null;
+
+
+        $scope.destroyToken = function () {
+
+            currentUser = undefined;
+
+            $scope.isLoggedIn = undefined;
+            delete $rootScope.currentUser;
             alert("Sorry to see you go...");
             //console.log($scope.text);
             $location.path('/');
             authService.destroyToken();
             console.log("User logged out and token destroyed");
-               /* .then(function(response){
+            /* .then(function(response){
 
-                        //$scope.messages = response.data;
-                        console.log("User logged out and token destroyed");
-                        return response.data;
-                    },
-                    function(error) {
-                        console.log('error', error);
+             //$scope.messages = response.data;
+             console.log("User logged out and token destroyed");
+             return response.data;
+             },
+             function(error) {
+             console.log('error', error);
 
-                    });*/
+             });*/
         };
+
 
     /*$scope.$watch($scope.isLoggedIn, function(user, token) {
         if (!user && !token){
